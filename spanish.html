@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Español AQA 8692 · Higher Tier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800;9..144,900&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  :root {
+    --terracotta: #c8553d;
+    --sun: #f4a261;
+    --cream: #fef6e4;
+    --ink: #1d2d44;
+    --olive: #748c4c;
+    --rose: #e63946;
+    --paper: #faf3e0;
+    --plum: #6b4e71;
+  }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream); color: var(--ink); min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(244,162,97,0.12) 0%, transparent 40%),
+      radial-gradient(circle at 80% 90%, rgba(200,85,61,0.10) 0%, transparent 40%);
+  }
+  .font-display { font-family: 'Fraunces', serif; font-weight: 800; letter-spacing: -0.02em; }
+  .font-serif-italic { font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; }
+  .card { background: white; border: 2px solid var(--ink); border-radius: 18px; box-shadow: 6px 6px 0 var(--ink); }
+  .btn-primary { background: var(--terracotta); color: white; border: 2px solid var(--ink); border-radius: 12px; box-shadow: 4px 4px 0 var(--ink); transition: all 0.1s; font-weight: 600; }
+  .btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+  .btn-primary:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--ink); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-secondary { background: white; color: var(--ink); border: 2px solid var(--ink); border-radius: 12px; box-shadow: 4px 4px 0 var(--ink); transition: all 0.1s; font-weight: 600; }
+  .btn-secondary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); background: var(--sun); }
+  .btn-secondary:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 var(--ink); }
+  .tile { background: white; border: 2px solid var(--ink); border-radius: 14px; box-shadow: 4px 4px 0 var(--ink); transition: all 0.15s; cursor: pointer; }
+  .tile:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+  .tile.selected { background: var(--sun); }
+  .pill { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--ink); color: var(--cream); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .input-field { border: 2px solid var(--ink); border-radius: 12px; padding: 14px 18px; font-size: 1.05rem; width: 100%; background: white; font-family: 'Outfit', sans-serif; }
+  .input-field:focus { outline: none; box-shadow: 4px 4px 0 var(--terracotta); }
+  textarea.input-field { font-family: 'Fraunces', serif; line-height: 1.5; }
+  .feedback-correct { background: #d4e8b8; border-color: var(--olive); color: #3d4f1f; }
+  .feedback-wrong { background: #fde0dc; border-color: var(--rose); color: #7a1c2a; }
+  @keyframes pop { 0% { transform: scale(0.97); opacity: 0.6; } 100% { transform: scale(1); opacity: 1; } }
+  .pop { animation: pop 0.2s ease-out; }
+  @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+  .shake { animation: shake 0.3s; }
+  .accent-char { border: 1.5px solid var(--ink); background: var(--cream); border-radius: 8px; padding: 4px 9px; font-family: 'Fraunces', serif; font-weight: 600; margin: 0 1px; cursor: pointer; transition: all 0.1s; font-size: 0.95rem; }
+  .accent-char:hover { background: var(--sun); }
+  .progress-bar { height: 10px; background: white; border: 2px solid var(--ink); border-radius: 999px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--terracotta); transition: width 0.4s ease; }
+  .reading-text { background: var(--paper); border: 1.5px solid var(--ink); border-radius: 12px; padding: 18px; font-family: 'Fraunces', serif; font-size: 1.05rem; line-height: 1.7; color: var(--ink); }
+  .reading-text p { margin-bottom: 0.8em; }
+  .grammar-note { background: var(--cream); border-left: 4px solid var(--terracotta); padding: 12px 14px; border-radius: 8px; font-family: 'Fraunces', serif; font-size: 0.95rem; }
+  .model-answer { background: var(--paper); border: 1.5px dashed var(--plum); border-radius: 10px; padding: 14px; font-family: 'Fraunces', serif; font-size: 1rem; line-height: 1.6; }
+  .topic-badge { display: inline-block; padding: 2px 8px; background: var(--plum); color: var(--cream); border-radius: 999px; font-size: 0.7rem; font-weight: 600; }
+  details summary { cursor: pointer; font-weight: 600; }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before { content: "▸ "; color: var(--terracotta); }
+  details[open] summary::before { content: "▾ "; }
+  .word-counter { font-family: 'Fraunces', serif; font-style: italic; }
+  .play-btn { background: var(--plum); color: var(--cream); border: 2px solid var(--ink); border-radius: 999px; padding: 12px 20px; font-weight: 600; box-shadow: 3px 3px 0 var(--ink); }
+  .play-btn:hover { background: var(--terracotta); }
+  .play-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+// ============================================================
+// AQA 8692 SPEC — Three Themes × Three Topics × Higher tier
+// ============================================================
+
+const THEMES = {
+  T1: { name: "People & Lifestyle", icon: "👥" },
+  T2: { name: "Popular Culture", icon: "🎭" },
+  T3: { name: "Communication & World Around Us", icon: "🌍" }
+};
+
+const TOPICS = {
+  "T1.1": { theme: "T1", name: "Identity & relationships", short: "Identity" },
+  "T1.2": { theme: "T1", name: "Healthy living & lifestyle", short: "Health" },
+  "T1.3": { theme: "T1", name: "Education & work", short: "School/Work" },
+  "T2.1": { theme: "T2", name: "Free-time activities", short: "Free time" },
+  "T2.2": { theme: "T2", name: "Customs, festivals & celebrations", short: "Customs" },
+  "T2.3": { theme: "T2", name: "Celebrity culture", short: "Celebrity" },
+  "T3.1": { theme: "T3", name: "Travel & tourism", short: "Travel" },
+  "T3.2": { theme: "T3", name: "Media & technology", short: "Tech" },
+  "T3.3": { theme: "T3", name: "Environment & where people live", short: "Environment" },
+};
+
+// ============================================================
+// VOCABULARY — aligned to AQA 8692 topics (heritage-speaker focused)
+// Emphasises low-frequency / written-form items, not basic words
+// ============================================================
+const VOCAB = {
+  "T1.1": [
+    ["el bienestar", "wellbeing"], ["la convivencia", "living together / coexistence"],
+    ["confiar en", "to trust in"], ["llevarse bien con", "to get on well with"],
+    ["pelearse", "to fight / argue"], ["el apoyo", "support"],
+    ["comprensivo", "understanding"], ["exigente", "demanding"],
+    ["mimar", "to spoil (a child)"], ["echar de menos", "to miss (someone)"],
+    ["el cariño", "affection"], ["estar harto de", "to be fed up with"],
+    ["los valores", "values"], ["respetar", "to respect"],
+    ["la amistad", "friendship"], ["compartir", "to share"],
+    ["los antepasados", "ancestors"], ["el orgullo", "pride"],
+    ["la pareja", "partner / couple"], ["soltero", "single"],
+    ["casado", "married"], ["divorciado", "divorced"],
+    ["el matrimonio", "marriage"], ["la boda", "wedding"],
+  ],
+  "T1.2": [
+    ["mantenerse en forma", "to stay in shape"], ["el ocio", "leisure"],
+    ["la alimentación", "diet / feeding"], ["equilibrado", "balanced"],
+    ["evitar", "to avoid"], ["la grasa", "fat"],
+    ["el azúcar", "sugar"], ["consumir", "to consume"],
+    ["sano", "healthy"], ["dañino", "harmful"],
+    ["la salud mental", "mental health"], ["el estrés", "stress"],
+    ["relajarse", "to relax"], ["dormir lo suficiente", "to sleep enough"],
+    ["adelgazar", "to lose weight"], ["engordar", "to put on weight"],
+    ["el sobrepeso", "overweight"], ["la obesidad", "obesity"],
+    ["fumar", "to smoke"], ["el tabaco", "tobacco"],
+    ["emborracharse", "to get drunk"], ["las drogas", "drugs"],
+    ["adictivo", "addictive"], ["la adicción", "addiction"],
+  ],
+  "T1.3": [
+    ["la asignatura", "subject"], ["el bachillerato", "A-levels equivalent"],
+    ["aprobar", "to pass (an exam)"], ["suspender", "to fail"],
+    ["sacar buenas notas", "to get good grades"], ["repasar", "to revise"],
+    ["el reto", "challenge"], ["esforzarse", "to make an effort"],
+    ["tener éxito", "to be successful"], ["el fracaso", "failure"],
+    ["la carrera", "degree / career"], ["la facultad", "university faculty"],
+    ["graduarse", "to graduate"], ["el porvenir", "the future / what's coming"],
+    ["el sueldo", "salary"], ["jubilarse", "to retire"],
+    ["el empleo", "employment"], ["el paro", "unemployment"],
+    ["el aprendizaje", "apprenticeship / learning"], ["las prácticas", "work placement"],
+    ["solicitar", "to apply for"], ["la entrevista", "interview"],
+    ["bilingüe", "bilingual"], ["el idioma", "language"],
+  ],
+  "T2.1": [
+    ["la afición", "hobby / passion"], ["aficionado a", "fond of"],
+    ["entretenido", "entertaining"], ["aburrirse", "to get bored"],
+    ["dar un paseo", "to go for a walk"], ["quedar con", "to meet up with"],
+    ["el ajedrez", "chess"], ["la lectura", "reading"],
+    ["el rodaje", "filming"], ["la trama", "plot"],
+    ["el guion", "script"], ["el protagonista", "main character"],
+    ["el ambiente", "atmosphere"], ["emocionante", "exciting"],
+    ["asombroso", "amazing"], ["increíble", "incredible"],
+    ["entrenar", "to train"], ["el entrenamiento", "training"],
+    ["el equipo", "team / equipment"], ["competir", "to compete"],
+    ["el partido", "match"], ["el campeonato", "championship"],
+    ["la pista", "court / track"], ["la cancha", "court (Latin Am.)"],
+  ],
+  "T2.2": [
+    ["la costumbre", "custom"], ["disfrazarse", "to dress up"],
+    ["el desfile", "parade"], ["los fuegos artificiales", "fireworks"],
+    ["el villancico", "Christmas carol"], ["la Nochebuena", "Christmas Eve"],
+    ["la Nochevieja", "New Year's Eve"], ["los Reyes Magos", "the Three Kings"],
+    ["la Semana Santa", "Holy Week"], ["la procesión", "procession"],
+    ["el Día de los Muertos", "Day of the Dead"], ["el ofrenda", "altar / offering"],
+    ["la calavera", "skull"], ["la corrida", "bullfight"],
+    ["el toro", "bull"], ["polémico", "controversial"],
+    ["festejar", "to celebrate"], ["el ayuno", "fasting"],
+    ["rezar", "to pray"], ["la misa", "mass"],
+    ["la herencia cultural", "cultural heritage"], ["el orgullo nacional", "national pride"],
+    ["mantener vivo", "to keep alive"], ["transmitir", "to pass on / transmit"],
+  ],
+  "T2.3": [
+    ["el famoso", "celebrity"], ["la fama", "fame"],
+    ["el éxito", "success"], ["el fracaso", "failure"],
+    ["seguir a", "to follow"], ["el seguidor", "follower"],
+    ["el rumor", "rumour"], ["el cotilleo", "gossip"],
+    ["la prensa rosa", "celebrity press / gossip magazines"], ["la fama efímera", "fleeting fame"],
+    ["el modelo a seguir", "role model"], ["malcriado", "spoiled"],
+    ["humilde", "humble"], ["arrogante", "arrogant"],
+    ["talentoso", "talented"], ["el galardón", "award / prize"],
+    ["el premio", "prize"], ["la entrega de premios", "awards ceremony"],
+    ["el estreno", "premiere / launch"], ["la portada", "front cover"],
+    ["la influencia", "influence"], ["el influencer", "influencer"],
+    ["criticar", "to criticise"], ["polémico", "controversial"],
+  ],
+  "T3.1": [
+    ["alojarse", "to stay (in accommodation)"], ["el alojamiento", "accommodation"],
+    ["el albergue juvenil", "youth hostel"], ["la pensión", "guesthouse"],
+    ["la estancia", "stay (period)"], ["hacer turismo", "to go sightseeing"],
+    ["el destino", "destination"], ["el itinerario", "itinerary"],
+    ["la frontera", "border"], ["el aduana", "customs"],
+    ["la maleta", "suitcase"], ["el equipaje", "luggage"],
+    ["facturar", "to check in (luggage)"], ["la tarjeta de embarque", "boarding pass"],
+    ["el retraso", "delay"], ["cancelar", "to cancel"],
+    ["el folleto", "brochure"], ["la guía turística", "tourist guide"],
+    ["el monumento", "monument"], ["el patrimonio", "heritage"],
+    ["el paisaje", "landscape"], ["la cordillera", "mountain range"],
+    ["la costa", "coast"], ["la selva", "jungle"],
+  ],
+  "T3.2": [
+    ["la pantalla", "screen"], ["la red social", "social network"],
+    ["publicar", "to post / publish"], ["compartir", "to share"],
+    ["el enlace", "link"], ["el archivo", "file"],
+    ["descargar", "to download"], ["subir", "to upload"],
+    ["la contraseña", "password"], ["el usuario", "user"],
+    ["la cuenta", "account"], ["bloquear", "to block"],
+    ["el acoso", "harassment / bullying"], ["el ciberacoso", "cyberbullying"],
+    ["la privacidad", "privacy"], ["el anonimato", "anonymity"],
+    ["el peligro", "danger"], ["la amenaza", "threat"],
+    ["proteger", "to protect"], ["la huella digital", "digital footprint"],
+    ["adictivo", "addictive"], ["depender de", "to depend on"],
+    ["la realidad virtual", "virtual reality"], ["la inteligencia artificial", "artificial intelligence"],
+  ],
+  "T3.3": [
+    ["el medio ambiente", "the environment"], ["la contaminación", "pollution"],
+    ["contaminar", "to pollute"], ["el calentamiento global", "global warming"],
+    ["el cambio climático", "climate change"], ["el efecto invernadero", "greenhouse effect"],
+    ["los gases de escape", "exhaust fumes"], ["la capa de ozono", "ozone layer"],
+    ["la deforestación", "deforestation"], ["el bosque", "forest"],
+    ["la selva tropical", "tropical rainforest"], ["en peligro de extinción", "endangered"],
+    ["la especie", "species"], ["la biodiversidad", "biodiversity"],
+    ["reciclar", "to recycle"], ["el reciclaje", "recycling"],
+    ["los residuos", "waste"], ["el envase", "container / packaging"],
+    ["renovable", "renewable"], ["la energía solar", "solar energy"],
+    ["la energía eólica", "wind energy"], ["ahorrar", "to save"],
+    ["sostenible", "sustainable"], ["la huella de carbono", "carbon footprint"],
+  ],
+};
+
+// ============================================================
+// ACCENT / SPELLING / AGREEMENT MODULES (from prior version)
+// ============================================================
+const ACCENT_ITEMS = [
+  { en: "the geography", correct: "la geografía" },
+  { en: "English (subject)", correct: "el inglés" },
+  { en: "the mathematics", correct: "las matemáticas" },
+  { en: "the music", correct: "la música" },
+  { en: "the television", correct: "la televisión" },
+  { en: "the train station", correct: "la estación de tren" },
+  { en: "the lesson/class", correct: "la lección" },
+  { en: "the day", correct: "el día" },
+  { en: "after", correct: "después" },
+  { en: "also", correct: "también" },
+  { en: "easy", correct: "fácil" },
+  { en: "difficult", correct: "difícil" },
+  { en: "useful", correct: "útil" },
+  { en: "quickly", correct: "rápidamente" },
+  { en: "I am (location)", correct: "estoy" },
+  { en: "he/she is (location)", correct: "está" },
+  { en: "I played (preterite)", correct: "jugué" },
+  { en: "I arrived (preterite)", correct: "llegué" },
+  { en: "he spoke (preterite)", correct: "habló" },
+  { en: "I will speak", correct: "hablaré" },
+  { en: "we will go", correct: "iremos" },
+  { en: "I would like", correct: "me gustaría" },
+  { en: "the typical food", correct: "la comida típica" },
+  { en: "the action film", correct: "la película de acción" },
+  { en: "the country", correct: "el país" },
+  { en: "I'm 13 years old", correct: "tengo trece años" },
+  { en: "the autumn", correct: "el otoño" },
+  { en: "tomorrow", correct: "mañana" },
+  { en: "the company", correct: "la compañía" },
+  { en: "Spain", correct: "España" },
+];
+
+const SPELLING_TRAPS = [
+  { hint: "to live", correct: "vivir" }, { hint: "to drink", correct: "beber" },
+  { hint: "tall (m)", correct: "alto" }, { hint: "to do/make", correct: "hacer" },
+  { hint: "there is/are", correct: "hay" }, { hint: "to find", correct: "encontrar" },
+  { hint: "five", correct: "cinco" }, { hint: "city", correct: "ciudad" },
+  { hint: "to go up", correct: "subir" }, { hint: "horse", correct: "caballo" },
+  { hint: "to be called", correct: "llamarse" }, { hint: "ice cream", correct: "helado" },
+  { hint: "to have (aux.)", correct: "haber" }, { hint: "yesterday", correct: "ayer" },
+  { hint: "to go out", correct: "salir" }, { hint: "ten", correct: "diez" },
+  { hint: "voice", correct: "voz" }, { hint: "to begin", correct: "empezar" },
+  { hint: "to seek/look for", correct: "buscar" }, { hint: "vegetables", correct: "verduras" },
+  { hint: "key (object)", correct: "llave" }, { hint: "to rain", correct: "llover" },
+  { hint: "white (m)", correct: "blanco" }, { hint: "now", correct: "ahora" },
+  { hint: "Wednesday", correct: "miércoles" },
+];
+
+const AGREEMENT_ITEMS = [
+  { prompt: "the problem (article + noun)", correct: "el problema", note: "Greek-origin -ma word: masculine despite -a ending" },
+  { prompt: "the system", correct: "el sistema", note: "-ma word: masculine" },
+  { prompt: "the day", correct: "el día", note: "Ends in -a but masculine" },
+  { prompt: "the hand", correct: "la mano", note: "Ends in -o but feminine" },
+  { prompt: "the photo", correct: "la foto", note: "Short for fotografía: feminine" },
+  { prompt: "red houses", correct: "casas rojas", note: "Feminine plural agreement" },
+  { prompt: "interesting books (m)", correct: "libros interesantes", note: "-e adjectives only pluralise" },
+  { prompt: "easy classes", correct: "clases fáciles", note: "-l adjectives add -es; keep accent" },
+  { prompt: "the cold water", correct: "el agua fría", note: "el agua (stressed initial a) but adjective is feminine" },
+  { prompt: "this house", correct: "esta casa", note: "esta (feminine)" },
+  { prompt: "these problems", correct: "estos problemas", note: "problema is masculine" },
+  { prompt: "much rain", correct: "mucha lluvia", note: "mucho agrees with feminine noun" },
+  { prompt: "the first day", correct: "el primer día", note: "primer: apocope before masculine singular" },
+  { prompt: "a good friend (m)", correct: "un buen amigo", note: "buen: apocope before masculine singular" },
+  { prompt: "the white eagle", correct: "el águila blanca", note: "el águila (stressed a) but feminine" },
+];
+
+// ============================================================
+// TENSE PRACTICE (preterite/imperfect/future/conditional/subjunctive)
+// ============================================================
+const PRET_VS_IMPF = [
+  { en: "When I was young, I lived in Peru.", es: "Cuando era joven, vivía en Perú.", tense: "both imperfect — background state" },
+  { en: "Yesterday I went to the cinema.", es: "Ayer fui al cine.", tense: "preterite — completed action" },
+  { en: "Last summer we travelled to Spain.", es: "El verano pasado viajamos a España.", tense: "preterite — specific completed event" },
+  { en: "Every day my grandmother used to cook for us.", es: "Todos los días mi abuela cocinaba para nosotros.", tense: "imperfect — habitual past" },
+  { en: "It was raining when I left the house.", es: "Llovía cuando salí de casa.", tense: "imperfect + preterite — interrupted action" },
+  { en: "I saw her three times last week.", es: "La vi tres veces la semana pasada.", tense: "preterite — specific number of times" },
+  { en: "I was reading when the phone rang.", es: "Estaba leyendo cuando sonó el teléfono.", tense: "imperfect progressive + preterite" },
+  { en: "She was tall and had blue eyes.", es: "Era alta y tenía los ojos azules.", tense: "imperfect — description" },
+  { en: "We bought a new car last month.", es: "Compramos un coche nuevo el mes pasado.", tense: "preterite — single completed event" },
+  { en: "When I was a child, I always played football.", es: "Cuando era niño, siempre jugaba al fútbol.", tense: "imperfect — childhood habit" },
+  { en: "Suddenly, the lights went out.", es: "De repente, se apagaron las luces.", tense: "preterite — sudden completed event" },
+  { en: "He used to work in a bank.", es: "Trabajaba en un banco.", tense: "imperfect — habitual past" },
+  { en: "I went to the beach and swam in the sea.", es: "Fui a la playa y nadé en el mar.", tense: "preterite — sequence of events" },
+  { en: "It was hot and the sun was shining.", es: "Hacía calor y el sol brillaba.", tense: "imperfect — weather and background" },
+  { en: "Last year I broke my leg.", es: "El año pasado me rompí la pierna.", tense: "preterite — single event" },
+];
+
+const FUTURE_COND = [
+  { en: "Tomorrow I will go to the library.", es: "Mañana iré a la biblioteca.", tense: "future" },
+  { en: "Next year we will study more.", es: "El año que viene estudiaremos más.", tense: "future" },
+  { en: "If I had money, I would travel.", es: "Si tuviera dinero, viajaría.", tense: "imperfect subjunctive + conditional" },
+  { en: "I would like to visit Argentina.", es: "Me gustaría visitar Argentina.", tense: "conditional" },
+  { en: "She will arrive at six.", es: "Llegará a las seis.", tense: "future" },
+  { en: "We would never do that.", es: "Nunca haríamos eso.", tense: "conditional" },
+  { en: "I have eaten too much.", es: "He comido demasiado.", tense: "present perfect" },
+  { en: "Have you ever been to Madrid?", es: "¿Has estado alguna vez en Madrid?", tense: "present perfect" },
+  { en: "I had finished when she called.", es: "Había terminado cuando llamó.", tense: "pluperfect + preterite" },
+  { en: "By next year I will have learned a lot.", es: "Para el año que viene habré aprendido mucho.", tense: "future perfect" },
+  { en: "I will work to save money.", es: "Trabajaré para ahorrar dinero.", tense: "future + para + infinitive" },
+  { en: "What would you do in my place?", es: "¿Qué harías en mi lugar?", tense: "conditional" },
+];
+
+const SUBJUNCTIVE = [
+  { en: "I want you to come.", es: "Quiero que vengas.", trigger: "querer que + subjunctive" },
+  { en: "It's important that we study.", es: "Es importante que estudiemos.", trigger: "es importante que + subjunctive" },
+  { en: "I hope it doesn't rain.", es: "Espero que no llueva.", trigger: "esperar que + subjunctive" },
+  { en: "When I'm older, I will travel.", es: "Cuando sea mayor, viajaré.", trigger: "cuando + subjunctive (future)" },
+  { en: "I don't think he's right.", es: "No creo que tenga razón.", trigger: "no creer que + subjunctive (doubt)" },
+  { en: "Although it's cold, I'm going out.", es: "Aunque haga frío, voy a salir.", trigger: "aunque + subjunctive (hypothetical)" },
+  { en: "We work so that you can study.", es: "Trabajamos para que puedas estudiar.", trigger: "para que + subjunctive (purpose)" },
+  { en: "Tell her to call me.", es: "Dile que me llame.", trigger: "decir (command) + subjunctive" },
+  { en: "I'm glad you are here.", es: "Me alegro de que estés aquí.", trigger: "emotion + subjunctive" },
+  { en: "It's possible that they may come.", es: "Es posible que vengan.", trigger: "es posible que + subjunctive" },
+  { en: "Before you leave, eat something.", es: "Antes de que salgas, come algo.", trigger: "antes de que + subjunctive" },
+  { en: "I'll do it as soon as I can.", es: "Lo haré en cuanto pueda.", trigger: "en cuanto + subjunctive (future)" },
+];
+
+// ============================================================
+// DICTATION SENTENCES (for text-to-speech playback)
+// AQA Higher dictation: ~5-6 sentences of 8-12 words each
+// ============================================================
+const DICTATION_SETS = [
+  {
+    id: "dict1", topic: "T1.1", title: "Identity & relationships",
+    sentences: [
+      "Mi hermana mayor estudia medicina en una universidad de Madrid.",
+      "Aunque a veces nos peleamos, siempre nos llevamos muy bien.",
+      "Mis padres son muy comprensivos y me apoyan en todo.",
+      "El año pasado fuimos juntos de vacaciones a la costa.",
+      "Espero que sigamos siendo una familia tan unida en el futuro.",
+    ]
+  },
+  {
+    id: "dict2", topic: "T1.2", title: "Healthy living",
+    sentences: [
+      "Para mantenerse en forma, hay que hacer ejercicio regularmente.",
+      "Evito comer demasiada grasa y azúcar entre comidas.",
+      "Antes fumaba pero lo dejé hace dos años.",
+      "Dormir lo suficiente es esencial para la salud mental.",
+      "Si todos cuidáramos nuestra alimentación, viviríamos más años.",
+    ]
+  },
+  {
+    id: "dict3", topic: "T1.3", title: "Education & work",
+    sentences: [
+      "Cuando termine el bachillerato, quiero estudiar idiomas en la universidad.",
+      "Sacar buenas notas requiere esfuerzo y mucha paciencia.",
+      "Mi profesora de español dice que tengo mucho talento.",
+      "Después de graduarme, me gustaría trabajar en el extranjero.",
+      "Si pudiera elegir cualquier carrera, sería traductora.",
+    ]
+  },
+  {
+    id: "dict4", topic: "T2.1", title: "Free-time activities",
+    sentences: [
+      "Los fines de semana suelo quedar con mis amigas en el centro.",
+      "Me apasiona el ajedrez desde que era pequeña.",
+      "La semana pasada vi una película increíble en el cine.",
+      "Mi hermano juega al baloncesto en el equipo del colegio.",
+      "Aunque a veces es difícil, siempre saco tiempo para leer.",
+    ]
+  },
+  {
+    id: "dict5", topic: "T2.2", title: "Customs & festivals",
+    sentences: [
+      "El día de los muertos es una fiesta muy importante en México.",
+      "Las familias preparan ofrendas con flores y comida tradicional.",
+      "Es fundamental mantener vivas estas costumbres antiguas.",
+      "Cuando era niña, mi abuela me contaba historias sobre estos días.",
+      "Ojalá que los jóvenes sigan celebrando estas tradiciones.",
+    ]
+  },
+  {
+    id: "dict6", topic: "T2.3", title: "Celebrity culture",
+    sentences: [
+      "Muchos famosos usan las redes sociales para influir en los jóvenes.",
+      "Algunos son buenos modelos a seguir, pero otros no tanto.",
+      "La prensa rosa publica rumores sin comprobar la información.",
+      "Si fuera famosa, intentaría proteger mi vida privada.",
+      "Es difícil mantener los pies en la tierra cuando tienes tanto éxito.",
+    ]
+  },
+  {
+    id: "dict7", topic: "T3.1", title: "Travel & tourism",
+    sentences: [
+      "El verano pasado pasamos quince días viajando por Andalucía.",
+      "Nos alojamos en un albergue juvenil cerca de la playa.",
+      "Hubo un retraso de tres horas en el aeropuerto.",
+      "Si tuviera más dinero, visitaría todos los países de Latinoamérica.",
+      "Lo que más me gustó fue ver los monumentos históricos de Granada.",
+    ]
+  },
+  {
+    id: "dict8", topic: "T3.2", title: "Media & technology",
+    sentences: [
+      "Paso demasiado tiempo mirando la pantalla del móvil.",
+      "El ciberacoso es uno de los problemas más graves entre adolescentes.",
+      "Es importante proteger nuestra privacidad en internet.",
+      "Antes leía libros, pero ahora prefiero ver vídeos.",
+      "Si los padres hablaran más con sus hijos, habría menos problemas.",
+    ]
+  },
+  {
+    id: "dict9", topic: "T3.3", title: "Environment",
+    sentences: [
+      "El cambio climático es la amenaza más grande de nuestro siglo.",
+      "Hace años que mi familia recicla todos los envases.",
+      "Si todos usáramos transporte público, habría menos contaminación.",
+      "Muchas especies están en peligro de extinción por la deforestación.",
+      "Espero que el gobierno invierta más en energías renovables.",
+    ]
+  },
+];
+
+// ============================================================
+// READING COMPREHENSION (AQA Higher tier style)
+// ============================================================
+const READINGS = [
+  {
+    id: "r1", title: "Mi familia peruana", topic: "T1.1", level: "Higher",
+    text: `Cada verano, mi madre y yo viajamos a Lima para visitar a mis abuelos. Aunque nací en Inglaterra, siempre me he sentido peruana también. Mis abuelos viven en una casa cerca del mar, en un barrio tranquilo donde la gente se conoce desde hace años.
+
+Mi abuela, que tiene setenta y dos años, cocina los platos típicos que aprendió de su madre: ceviche, lomo saltado y ají de gallina. Cuando era pequeña, pensaba que era la mejor cocinera del mundo, y todavía lo creo. Sin embargo, ahora le cuesta más estar de pie tanto tiempo, así que la ayudo cuando puedo.
+
+El año pasado, mi abuelo se jubiló después de trabajar cuarenta años como ingeniero. Al principio estaba contento, pero después de unos meses dijo que se aburría. Ahora ha empezado a dar clases de matemáticas gratis a los niños del barrio que no pueden pagar tutorías privadas. Dice que se siente útil otra vez.
+
+Si pudiera, pasaría más tiempo allí cada año. Quizás cuando termine mis estudios, vaya a vivir en Lima durante un año. Mi madre dice que sería una buena experiencia, aunque mi padre prefiere que primero vaya a la universidad.`,
+    questions: [
+      { q: "Why does the narrator go to Lima every summer?", choices: ["To work", "To visit grandparents", "For a Spanish course", "Parents live there"], correct: 1, explain: "'viajamos a Lima para visitar a mis abuelos'." },
+      { q: "What does the narrator think of her grandmother's cooking?", choices: ["Stopped cooking", "Only cooks ceviche", "Still the best cook", "Teaches narrator"], correct: 2, explain: "'todavía lo creo' — still believes it." },
+      { q: "After retiring, the grandfather...", choices: ["Travelled Peru", "Was bored after months", "Returned to engineering", "Moved away"], correct: 1, explain: "'después de unos meses dijo que se aburría'." },
+      { q: "What does the grandfather do now?", choices: ["Free maths lessons", "Private tutoring", "Kitchen helper", "Volunteer engineer"], correct: 0, explain: "'dar clases de matemáticas gratis'." },
+      { q: "What does the father want her to do?", choices: ["Move to Lima", "Take a gap year", "University first", "Study in Peru"], correct: 2, explain: "'mi padre prefiere que primero vaya a la universidad' — subjunctive 'vaya'." }
+    ]
+  },
+  {
+    id: "r2", title: "El medio ambiente en mi ciudad", topic: "T3.3", level: "Higher",
+    text: `La contaminación se ha convertido en uno de los problemas más graves de mi ciudad. Cuando mi madre era joven, podía ver las estrellas desde la ventana de su dormitorio. Hoy en día, esto es casi imposible debido a la cantidad de coches y fábricas que producen emisiones contaminantes.
+
+El año pasado, el ayuntamiento decidió crear más zonas peatonales y carriles para bicicletas en el centro. Aunque muchos conductores se quejaron al principio, los resultados han sido positivos: la calidad del aire ha mejorado un quince por ciento, según un estudio reciente. Además, las pequeñas tiendas del centro han notado un aumento de clientes, porque ahora la gente pasea más por las calles.
+
+Sin embargo, no todos están de acuerdo. Algunos comerciantes que dependen del coche para hacer entregas dicen que las nuevas normas les perjudican. Mi tío, que tiene una panadería, ha tenido que cambiar el horario de sus repartos para evitar las multas.
+
+En mi opinión, aunque los cambios son difíciles, son necesarios. Si no hacemos nada ahora, el aire que respirarán nuestros hijos será todavía peor. Lo ideal sería que el gobierno invirtiera más en transporte público para que la gente no necesitara usar el coche.`,
+    questions: [
+      { q: "What could the narrator's mother do that's now difficult?", choices: ["Walk to school", "See stars from bedroom", "Cycle in centre", "Visit shops"], correct: 1, explain: "'podía ver las estrellas desde la ventana de su dormitorio'." },
+      { q: "By how much has air quality improved?", choices: ["5%", "15%", "20%", "50%"], correct: 1, explain: "'un quince por ciento'." },
+      { q: "What benefit have small shops noticed?", choices: ["Lower rents", "More customers", "Easier deliveries", "Subsidies"], correct: 1, explain: "'un aumento de clientes'." },
+      { q: "Why has the uncle changed his delivery times?", choices: ["Van broke", "To avoid fines", "Staff request", "Customers prefer it"], correct: 1, explain: "'para evitar las multas'." },
+      { q: "What does the narrator think the government should do?", choices: ["Ban cars", "Build roads", "Invest in public transport", "Lower taxes"], correct: 2, explain: "'que el gobierno invirtiera más en transporte público' — imperfect subjunctive." }
+    ]
+  },
+  {
+    id: "r3", title: "El uso de las redes sociales", topic: "T3.2", level: "Higher",
+    text: `Según un estudio publicado el mes pasado, los adolescentes españoles pasan una media de cinco horas al día conectados a las redes sociales. Esta cifra ha aumentado considerablemente desde la pandemia, cuando muchos jóvenes empezaron a usar el móvil con más frecuencia para mantenerse en contacto con sus amigos.
+
+Marta, una estudiante de quince años, dice: "Reconozco que paso demasiado tiempo mirando el móvil. A veces, cuando estoy con mi familia durante la cena, sigo pensando en lo que están publicando mis amigos." Su madre añade que ha intentado prohibir los móviles en la mesa, pero le resulta difícil mantener esa regla.
+
+No todo es negativo, según los expertos. Las redes sociales también pueden tener efectos positivos: permiten a los jóvenes desarrollar su creatividad, descubrir intereses nuevos y participar en debates importantes. Por ejemplo, muchos adolescentes han usado estas plataformas para apoyar causas sociales como la lucha contra el cambio climático.
+
+Lo más importante, dicen los psicólogos, es enseñar a los jóvenes a usar la tecnología de forma equilibrada. Si los padres hablan abiertamente con sus hijos sobre estos temas, en vez de prohibir todo, será más probable que los adolescentes desarrollen hábitos saludables. Al final, prohibir algo a un adolescente suele ser la mejor forma de hacerlo aún más atractivo.`,
+    questions: [
+      { q: "Hours per day teenagers spend on social media?", choices: ["Three", "Four", "Five", "Seven"], correct: 2, explain: "'una media de cinco horas al día'." },
+      { q: "Why did this rise during pandemic?", choices: ["School required", "Contact with friends", "Free wifi", "Cheaper phones"], correct: 1, explain: "'para mantenerse en contacto con sus amigos'." },
+      { q: "What does Marta admit?", choices: ["Uses it secretly", "Thinks about it at dinner", "Deleted accounts", "Grades dropped"], correct: 1, explain: "'sigo pensando en lo que están publicando mis amigos'." },
+      { q: "Positive effect according to experts?", choices: ["Better grades", "Creativity & new interests", "Save money", "Better sleep"], correct: 1, explain: "'desarrollar su creatividad'." },
+      { q: "What do psychologists recommend?", choices: ["Total ban", "Open conversation", "Tracking software", "Remove apps"], correct: 1, explain: "'hablan abiertamente con sus hijos'." },
+      { q: "What does the final sentence suggest?", choices: ["Banning makes more appealing", "Teens always obey", "Tech is harmful", "Schools should ban"], correct: 0, explain: "'prohibir algo... hacerlo aún más atractivo'." }
+    ]
+  },
+  {
+    id: "r4", title: "Mis planes para el futuro", topic: "T1.3", level: "Higher",
+    text: `Cuando termine el instituto, me gustaría estudiar medicina, aunque sé que no será fácil. Hay que sacar notas muy altas en los exámenes y la carrera dura seis años. Sin embargo, desde que era pequeña, he querido ser médica como mi tía, que trabaja en un hospital de Sevilla.
+
+El verano pasado, hice unas prácticas de dos semanas en su hospital. Al principio estaba nerviosa porque pensaba que vería cosas desagradables, pero la experiencia fue muy diferente de lo que esperaba. Pasé la mayoría del tiempo en la sala de pediatría, ayudando a entretener a los niños mientras esperaban a sus médicos. Algunos estaban asustados y se notaba que necesitaban a alguien que los escuchara.
+
+Lo que más me sorprendió fue lo cansados que estaban los médicos al final del día. Mi tía me confesó que a veces trabaja turnos de doce horas, y que muchos de sus colegas han dejado la profesión por el estrés. Aunque esto me preocupa, no me ha hecho cambiar de opinión. Al contrario, creo que es aún más importante que haya gente dispuesta a hacer este trabajo difícil.
+
+Si no consiguiera entrar en medicina, mi segunda opción sería estudiar psicología. Las dos carreras me interesan porque quiero ayudar a las personas, aunque de formas distintas.`,
+    questions: [
+      { q: "What does the narrator want to study?", choices: ["Psychology", "Nursing", "Medicine", "Pediatrics"], correct: 2, explain: "'me gustaría estudiar medicina'." },
+      { q: "How long is the degree?", choices: ["3 years", "4 years", "6 years", "8 years"], correct: 2, explain: "'la carrera dura seis años'." },
+      { q: "What did she do last summer?", choices: ["Studied in Seville", "Two-week placement", "Visited aunt", "Volunteered at school"], correct: 1, explain: "'hice unas prácticas de dos semanas'." },
+      { q: "What surprised her most?", choices: ["High pay", "How tired doctors were", "Happy children", "Modern hospital"], correct: 1, explain: "'lo cansados que estaban los médicos'." },
+      { q: "How has this affected her plans?", choices: ["Now uncertain", "Decided against", "Strengthened resolve", "Wants pediatrics"], correct: 2, explain: "'no me ha hecho cambiar de opinión'." },
+      { q: "Her backup plan?", choices: ["Nursing", "Psychology", "Teaching", "Pharmacy"], correct: 1, explain: "'mi segunda opción sería estudiar psicología'." }
+    ]
+  },
+  {
+    id: "r5", title: "La presión de ser famoso", topic: "T2.3", level: "Higher",
+    text: `Hace unos años, parecía que todos los adolescentes querían ser influencers. Las redes sociales hacían que la fama pareciera fácil: bastaba con publicar fotos bonitas o vídeos divertidos para conseguir miles de seguidores. Sin embargo, la realidad de ser famoso es mucho más complicada.
+
+Sofía Ramírez, una cantante española de veintidós años, contó en una entrevista reciente que su éxito le ha traído tantas dificultades como alegrías. "Al principio estaba encantada de que la gente me reconociera por la calle, pero ahora ya no puedo salir sin que alguien me pida una foto", explicó. Además, mencionó que la presión de mantenerse siempre perfecta para sus seguidores le ha causado problemas de ansiedad.
+
+No todos los famosos manejan la fama de la misma manera. Algunos, como Sofía, intentan mantener los pies en la tierra y dedican parte de su tiempo a causas benéficas. Otros, en cambio, parecen vivir solo para ser vistos, organizando sus vidas alrededor de las fotos que publicarán al día siguiente.
+
+Los psicólogos advierten que admirar demasiado a los famosos puede ser perjudicial, especialmente para los jóvenes. Lo que ven en las redes no es la realidad: es una versión cuidadosamente editada. Si los jóvenes comprendieran esto, quizás no se sentirían tan mal cuando comparan sus vidas con las de sus ídolos.`,
+    questions: [
+      { q: "What did teenagers want to be a few years ago?", choices: ["Doctors", "Athletes", "Influencers", "Teachers"], correct: 2, explain: "'todos los adolescentes querían ser influencers'." },
+      { q: "Sofía Ramírez's age?", choices: ["18", "20", "22", "25"], correct: 2, explain: "'veintidós años'." },
+      { q: "What problem has fame caused her?", choices: ["Money", "Anxiety", "Family", "Singing voice"], correct: 1, explain: "'le ha causado problemas de ansiedad'." },
+      { q: "What does Sofía do with her time?", choices: ["Travels constantly", "Only posts photos", "Charity work", "Avoids public"], correct: 2, explain: "'dedican parte de su tiempo a causas benéficas'." },
+      { q: "What do psychologists warn about?", choices: ["Time on phones", "Admiring celebrities too much", "Buying products", "Watching videos"], correct: 1, explain: "'admirar demasiado a los famosos puede ser perjudicial'." },
+      { q: "What is social media according to the article?", choices: ["A documentary", "Truth", "Edited version of reality", "Random posts"], correct: 2, explain: "'una versión cuidadosamente editada'." }
+    ]
+  },
+];
+
+// ============================================================
+// TRANSLATION TASKS (Eng → Spa, ~35-50 word AQA style)
+// ============================================================
+const TRANSLATIONS = [
+  {
+    id: "tr1", topic: "T1.1", level: 35,
+    english: "My family is very important to me. I live with my parents and my younger brother. My grandmother used to live with us but now she lives in Spain. We see her every summer.",
+    spanish_model: "Mi familia es muy importante para mí. Vivo con mis padres y mi hermano menor. Mi abuela vivía con nosotros, pero ahora vive en España. La vemos todos los veranos.",
+    keywords: ["importante", "vivo con", "hermano menor", "vivía", "ahora", "todos los veranos"],
+    notes: ["'used to live' = imperfect (vivía)", "'every summer' = todos los veranos", "Watch the accent on mí (preposition vs mi possessive)"]
+  },
+  {
+    id: "tr2", topic: "T1.2", level: 35,
+    english: "It is important to eat healthily. I try to avoid sugar and I drink a lot of water. Last year I started doing more exercise. If I had more time, I would go to the gym every day.",
+    spanish_model: "Es importante comer de forma saludable. Intento evitar el azúcar y bebo mucha agua. El año pasado empecé a hacer más ejercicio. Si tuviera más tiempo, iría al gimnasio todos los días.",
+    keywords: ["importante", "saludable", "evitar", "empecé", "si tuviera", "iría"],
+    notes: ["'If I had... I would go' = si tuviera + iría (imperfect subjunctive + conditional)", "'last year I started' = el año pasado empecé (preterite)"]
+  },
+  {
+    id: "tr3", topic: "T1.3", level: 50,
+    english: "When I finish school, I want to study languages at university. I have always been interested in Spanish because my mother is from Peru. After my degree, I would like to work as a translator. It is a difficult career, but I think it would be very interesting.",
+    spanish_model: "Cuando termine el instituto, quiero estudiar idiomas en la universidad. Siempre me han interesado los idiomas porque mi madre es de Perú. Después de la carrera, me gustaría trabajar como traductora. Es una carrera difícil, pero creo que sería muy interesante.",
+    keywords: ["cuando termine", "siempre me han", "me gustaría", "trabajar como", "sería"],
+    notes: ["'When I finish' = cuando termine (subjunctive — future reference)", "'I have always been interested' = siempre me han interesado (present perfect)", "'I would like' = me gustaría (conditional)"]
+  },
+  {
+    id: "tr4", topic: "T2.1", level: 35,
+    english: "I love going to the cinema with my friends. Last weekend we saw a really exciting film. Although the tickets are expensive, we go every month. I prefer films that have a good plot.",
+    spanish_model: "Me encanta ir al cine con mis amigos. El fin de semana pasado vimos una película muy emocionante. Aunque las entradas son caras, vamos todos los meses. Prefiero las películas que tienen una buena trama.",
+    keywords: ["me encanta", "vimos", "aunque", "todos los meses", "trama"],
+    notes: ["'Last weekend we saw' = el fin de semana pasado vimos (preterite)", "Watch 'although are expensive' = present indicative (real situation)"]
+  },
+  {
+    id: "tr5", topic: "T2.2", level: 50,
+    english: "In my country, the Day of the Dead is a very important festival. Families prepare offerings with flowers, candles and the favourite food of those who have died. It is essential to keep these traditions alive. When I was a child, my grandmother used to tell me stories about our ancestors.",
+    spanish_model: "En mi país, el Día de los Muertos es una fiesta muy importante. Las familias preparan ofrendas con flores, velas y la comida favorita de los que han muerto. Es fundamental mantener vivas estas tradiciones. Cuando era pequeña, mi abuela me contaba historias sobre nuestros antepasados.",
+    keywords: ["fiesta", "ofrendas", "han muerto", "mantener vivas", "era pequeña", "contaba"],
+    notes: ["'used to tell' = contaba (imperfect — habitual past)", "'when I was a child' = cuando era pequeña (imperfect for state)", "'have died' = han muerto (present perfect)"]
+  },
+  {
+    id: "tr6", topic: "T3.1", level: 35,
+    english: "Last summer we travelled to Andalusia. We stayed in a small hotel near the beach. The weather was hot but there was a lot of wind. If I could, I would go back next year.",
+    spanish_model: "El verano pasado viajamos a Andalucía. Nos alojamos en un hotel pequeño cerca de la playa. Hacía calor pero había mucho viento. Si pudiera, volvería el año que viene.",
+    keywords: ["el verano pasado", "viajamos", "nos alojamos", "hacía calor", "si pudiera", "volvería"],
+    notes: ["'we travelled / we stayed' = preterite (specific events)", "'the weather was / there was' = imperfect (description/background)", "'if I could, I would go back' = si pudiera + volvería"]
+  },
+  {
+    id: "tr7", topic: "T3.2", level: 50,
+    english: "Social media has changed the way we communicate. Many young people spend more than five hours a day looking at their phones. Although there are positive aspects, like keeping in contact with friends, I think it can also be dangerous. If parents talked more openly with their children, there would be fewer problems.",
+    spanish_model: "Las redes sociales han cambiado la forma de comunicarnos. Muchos jóvenes pasan más de cinco horas al día mirando el móvil. Aunque hay aspectos positivos, como mantenerse en contacto con los amigos, creo que también puede ser peligroso. Si los padres hablaran más abiertamente con sus hijos, habría menos problemas.",
+    keywords: ["han cambiado", "más de cinco horas", "aunque", "si... hablaran", "habría"],
+    notes: ["'has changed' = han cambiado (present perfect, agreeing with plural redes)", "'If parents talked... there would be' = si hablaran + habría (imperfect subjunctive + conditional)"]
+  },
+  {
+    id: "tr8", topic: "T3.3", level: 50,
+    english: "Climate change is the biggest problem facing our generation. Every year there are more floods, fires and droughts. Although many governments have promised to act, the reality is that not enough is being done. If we don't change our habits soon, it will be too late for future generations.",
+    spanish_model: "El cambio climático es el problema más grande al que se enfrenta nuestra generación. Cada año hay más inundaciones, incendios y sequías. Aunque muchos gobiernos han prometido actuar, la realidad es que no se está haciendo lo suficiente. Si no cambiamos nuestros hábitos pronto, será demasiado tarde para las generaciones futuras.",
+    keywords: ["cambio climático", "se enfrenta", "han prometido", "no se está haciendo", "si no cambiamos"],
+    notes: ["'is being done' = se está haciendo (passive 'se')", "'If we don't change... it will be' = si no cambiamos + será (NOT subjunctive — real condition)"]
+  },
+];
+
+// ============================================================
+// WRITING TASKS (90-word and 150-word AQA Higher style)
+// ============================================================
+const WRITING_TASKS = [
+  {
+    id: "w1", topic: "T1.1", words: 90, level: "Higher",
+    title: "Tu familia",
+    prompt: "Escribe sobre tu familia. Menciona:",
+    bullets: [
+      "los miembros de tu familia y cómo son",
+      "una actividad que hicisteis juntos recientemente",
+      "lo que te gustaría hacer con tu familia en el futuro"
+    ],
+    model: `Mi familia es bastante pequeña pero muy unida. Vivo con mis padres y mi hermano menor, que tiene diez años. Mis padres son muy comprensivos y siempre nos apoyan. Mi hermano puede ser pesado a veces, pero también es muy divertido.
+
+El fin de semana pasado fuimos todos a la costa. Nos alojamos en un hotel cerca del mar y comimos pescado fresco en un restaurante típico. Lo pasamos genial.
+
+En el futuro, me gustaría viajar a Perú con mi madre para visitar a mi familia peruana. Espero que podamos ir el año que viene.`,
+    rubric: [
+      "Three tenses minimum: present, preterite, conditional/future",
+      "At least one complex structure (si + subjunctive, cuando + subjunctive, or me gustaría que + subjunctive)",
+      "Opinions with justification (creo que, en mi opinión, porque)",
+      "Range of connectives (sin embargo, además, aunque, ya que)",
+      "Idiomatic phrases (lo pasamos genial, ser pesado, etc.)",
+      "Word count between 80-100 (target 90)"
+    ]
+  },
+  {
+    id: "w2", topic: "T1.2", words: 90, level: "Higher",
+    title: "Una vida sana",
+    prompt: "Escribe sobre la vida sana. Menciona:",
+    bullets: [
+      "qué haces para mantenerte en forma",
+      "un mal hábito que tenías y cómo lo cambiaste",
+      "qué harás en el futuro para cuidar tu salud"
+    ],
+    model: `Para mantenerme en forma, hago ejercicio tres veces a la semana. Voy al gimnasio con mi mejor amiga y también nadamos los sábados. Intento comer de forma equilibrada, evitando demasiado azúcar y grasa.
+
+Antes pasaba demasiado tiempo viendo la tele y no dormía lo suficiente. Hace un año decidí cambiar esto. Ahora me acuesto antes y leo en lugar de mirar pantallas. Me siento mucho mejor.
+
+En el futuro, voy a empezar a hacer yoga porque dicen que es muy bueno para la salud mental. Si tuviera más tiempo, también iría a clases de baile.`,
+    rubric: [
+      "Three tenses: present, imperfect (for past habits), future/conditional",
+      "Imperfect for habitual past ('pasaba', 'no dormía')",
+      "Conditional with si + imperfect subjunctive at least once",
+      "Specific details (number of times, days, places)",
+      "Connectives showing contrast (antes... ahora)",
+      "Word count 80-100"
+    ]
+  },
+  {
+    id: "w3", topic: "T1.3", words: 150, level: "Higher",
+    title: "Mis estudios y mi futuro",
+    prompt: "Escribe sobre tus estudios y tus planes para el futuro. Menciona:",
+    bullets: [
+      "tus asignaturas favoritas y por qué",
+      "una experiencia escolar que te marcó",
+      "qué quieres estudiar después del instituto y por qué",
+      "qué profesión te gustaría tener y cómo será tu vida"
+    ],
+    model: `Mis asignaturas favoritas son el español y la historia, porque me apasiona aprender sobre otras culturas. El español me resulta especialmente fácil ya que mi madre es de Perú y siempre hemos hablado los dos idiomas en casa. La historia, por otro lado, me ayuda a entender el mundo actual.
+
+Una experiencia que me marcó fue cuando, en el año ocho, hicimos un intercambio con un instituto en Madrid. Pasé dos semanas con una familia española y mejoré muchísimo mi español escrito. También hice amigos que sigo viendo en redes sociales.
+
+Cuando termine el bachillerato, quiero estudiar idiomas modernos en la universidad. Me gustaría especializarme en traducción porque creo que es una carrera fascinante. En el futuro, me encantaría trabajar para una organización internacional, quizás en las Naciones Unidas.
+
+Si todo va bien, viviré entre dos países y podré usar mis idiomas todos los días. Sería el trabajo perfecto.`,
+    rubric: [
+      "All five main tenses: present, preterite, imperfect, future, conditional",
+      "Subjunctive after 'cuando' referring to future ('cuando termine')",
+      "Complex sentences with subordinate clauses",
+      "Specific personal details (Year 8 exchange, mother from Peru)",
+      "Idiomatic phrases (me marcó, me apasiona, si todo va bien)",
+      "Opinions with reasons throughout",
+      "Word count 140-160"
+    ]
+  },
+  {
+    id: "w4", topic: "T2.1", words: 90, level: "Higher",
+    title: "El tiempo libre",
+    prompt: "Escribe sobre tu tiempo libre. Menciona:",
+    bullets: [
+      "qué te gusta hacer normalmente",
+      "una actividad nueva que probaste recientemente",
+      "qué harías si tuvieras más tiempo libre"
+    ],
+    model: `Cuando tengo tiempo libre, me gusta leer y quedar con mis amigas. Los fines de semana solemos ir al centro o al cine. También juego al baloncesto los miércoles después del instituto.
+
+El mes pasado probé el escalada en un centro nuevo. Al principio tenía miedo, pero me encantó. Pienso volver este fin de semana porque me parece una actividad muy emocionante.
+
+Si tuviera más tiempo libre, aprendería a tocar la guitarra. Siempre me ha interesado la música y mi padre tiene una guitarra vieja en casa. Sería genial poder tocar mis canciones favoritas.`,
+    rubric: [
+      "Present, preterite, conditional with si + imperfect subjunctive",
+      "Adverbs of frequency (normalmente, los fines de semana, siempre)",
+      "Emotion verbs (me encantó, me parece, me interesa)",
+      "Time markers (el mes pasado, este fin de semana, en el futuro)",
+      "Word count 80-100"
+    ]
+  },
+  {
+    id: "w5", topic: "T3.2", words: 150, level: "Higher",
+    title: "La tecnología y los jóvenes",
+    prompt: "Escribe sobre la tecnología y los jóvenes. Menciona:",
+    bullets: [
+      "los aspectos positivos de la tecnología",
+      "los problemas que puede causar",
+      "tu experiencia personal con las redes sociales",
+      "qué crees que debería cambiar en el futuro"
+    ],
+    model: `La tecnología tiene muchos aspectos positivos para los jóvenes. Nos permite mantenernos en contacto con amigos que viven lejos, buscar información para los deberes y aprender cosas nuevas. Por ejemplo, yo uso aplicaciones para mejorar mi español escrito.
+
+Sin embargo, también puede causar problemas serios. El ciberacoso afecta a muchísimos adolescentes y las redes sociales pueden ser muy adictivas. Algunos amigos míos pasan más de seis horas al día mirando el móvil, lo cual me parece preocupante.
+
+En mi caso, he tenido experiencias buenas y malas. Las redes sociales me ayudaron a hacer amigos durante la pandemia, pero también me hicieron sentir mal cuando comparaba mi vida con la de otros. Decidí dejar de usar Instagram durante un mes y me sentí mucho mejor.
+
+En el futuro, creo que es fundamental que los colegios enseñen a los jóvenes a usar la tecnología de forma equilibrada. Si los padres también hablaran más con sus hijos sobre estos temas, habría menos problemas.`,
+    rubric: [
+      "Five tenses minimum",
+      "Subjunctive: es fundamental que + subjunctive; si + imperfect subjunctive",
+      "Passive 'se' or impersonal constructions",
+      "Personal anecdote with imperfect for description",
+      "Counter-arguments (sin embargo, pero también, aunque)",
+      "Suggestion/recommendation language (creo que es fundamental, sería mejor)",
+      "Word count 140-160"
+    ]
+  },
+  {
+    id: "w6", topic: "T3.3", words: 150, level: "Higher",
+    title: "El medio ambiente",
+    prompt: "Escribe sobre el medio ambiente. Menciona:",
+    bullets: [
+      "los problemas medioambientales más graves",
+      "qué hace tu familia para ayudar",
+      "qué hizo tu colegio el año pasado",
+      "qué propondrías al gobierno para mejorar la situación"
+    ],
+    model: `El cambio climático es, sin duda, el problema medioambiental más grave de nuestro tiempo. La contaminación del aire, la deforestación y la pérdida de biodiversidad son temas que me preocupan profundamente. Cada año hay más incendios e inundaciones en todo el mundo.
+
+En mi familia intentamos hacer lo posible para reducir nuestro impacto. Reciclamos todo lo que podemos y compramos productos locales siempre que es posible. Mi padre se ha comprado una bicicleta para ir al trabajo en vez del coche.
+
+El año pasado, en mi colegio organizamos una campaña para reducir el uso de plástico. Pusimos contenedores nuevos para reciclar y dimos charlas a los alumnos más pequeños sobre la importancia de cuidar el planeta. Fue un proyecto muy exitoso.
+
+Si yo pudiera proponerle algo al gobierno, le pediría que invirtiera más en transporte público y energías renovables. Sería fundamental que prohibieran los coches contaminantes en los centros de las ciudades. Si no actuamos ahora, las generaciones futuras pagarán las consecuencias.`,
+    rubric: [
+      "Five tenses + subjunctive triggers",
+      "Imperfect subjunctive in conditional ('si pudiera... le pediría')",
+      "Subjunctive after 'es fundamental que', 'le pediría que'",
+      "Specific concrete examples (bicycle, plastic campaign)",
+      "Time markers across past, present, future",
+      "Final warning/conclusion (si no actuamos ahora...)",
+      "Word count 140-160"
+    ]
+  },
+];
+
+const ACCENTS = ["á", "é", "í", "ó", "ú", "ñ", "Á", "É", "Í", "Ó", "Ú", "Ñ", "¿", "¡"];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function exactMatch(input, correct) {
+  return input.trim().toLowerCase().replace(/[.,!?¡¿]+$/g, "") ===
+         correct.trim().toLowerCase().replace(/[.,!?¡¿]+$/g, "");
+}
+
+function findDifferences(input, correct) {
+  const ci = input.toLowerCase().replace(/[.,!?¡¿]+$/g, "").trim();
+  const cc = correct.toLowerCase().replace(/[.,!?¡¿]+$/g, "").trim();
+  if (ci === cc) return [];
+  const issues = [];
+  const stripAccents = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ñ/g, "n");
+  if (stripAccents(ci) === stripAccents(cc)) {
+    issues.push("Missing or wrong accents/ñ");
+  } else {
+    if (ci.replace(/h/g, "") === cc.replace(/h/g, "")) issues.push("Silent 'h' issue");
+    if (ci.replace(/[bv]/g, "x") === cc.replace(/[bv]/g, "x")) issues.push("b/v confusion");
+    if (ci.replace(/[csz]/g, "x") === cc.replace(/[csz]/g, "x")) issues.push("c/s/z confusion");
+    if (ci.replace(/ll/g, "y") === cc.replace(/ll/g, "y")) issues.push("ll/y confusion");
+  }
+  return issues;
+}
+
+function wordCount(text) {
+  return text.trim().split(/\s+/).filter(w => w.length > 0).length;
+}
+
+// Spanish text-to-speech
+function useSpanishSpeech() {
+  const [voice, setVoice] = useState(null);
+  const [available, setAvailable] = useState(false);
+
+  useEffect(() => {
+    if (!('speechSynthesis' in window)) return;
+    const pickVoice = () => {
+      const voices = window.speechSynthesis.getVoices();
+      // Prefer Spanish (Spain) voices
+      const spanishVoice = voices.find(v => v.lang.startsWith('es-ES')) ||
+                           voices.find(v => v.lang.startsWith('es-MX')) ||
+                           voices.find(v => v.lang.startsWith('es-'));
+      if (spanishVoice) {
+        setVoice(spanishVoice);
+        setAvailable(true);
+      }
+    };
+    pickVoice();
+    window.speechSynthesis.onvoiceschanged = pickVoice;
+  }, []);
+
+  const speak = useCallback((text, rate = 0.85) => {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    if (voice) utter.voice = voice;
+    utter.lang = "es-ES";
+    utter.rate = rate;
+    utter.pitch = 1.0;
+    window.speechSynthesis.speak(utter);
+  }, [voice]);
+
+  return { speak, available };
+}
+
+// ============================================================
+// APP
+// ============================================================
+function App() {
+  const [screen, setScreen] = useState("home");
+  const [mode, setMode] = useState(null);
+  const [selectedTopics, setSelectedTopics] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
+  const [stats, setStats] = useState(() => {
+    const s = localStorage.getItem("aqaSpanishStats");
+    return s ? JSON.parse(s) : { correct: 0, attempted: 0, streak: 0, bestStreak: 0, byMode: {} };
+  });
+
+  useEffect(() => { localStorage.setItem("aqaSpanishStats", JSON.stringify(stats)); }, [stats]);
+
+  const updateStats = (right, modeKey) => {
+    setStats(s => {
+      const ns = right ? s.streak + 1 : 0;
+      const byMode = { ...s.byMode };
+      const m = byMode[modeKey] || { correct: 0, attempted: 0 };
+      m.correct += right ? 1 : 0;
+      m.attempted += 1;
+      byMode[modeKey] = m;
+      return {
+        correct: s.correct + (right ? 1 : 0),
+        attempted: s.attempted + 1,
+        streak: ns,
+        bestStreak: Math.max(s.bestStreak, ns),
+        byMode,
+      };
+    });
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto px-4 py-6">
+      <Header stats={stats} onHome={() => setScreen("home")} />
+
+      {screen === "home" && <Home stats={stats} onPick={(m) => {
+        setMode(m);
+        if (m === "vocab") setScreen("topics");
+        else if (m === "reading") setScreen("reading-list");
+        else if (m === "dictation") setScreen("dictation-list");
+        else if (m === "translate") setScreen("translate-list");
+        else if (m === "writing") setScreen("writing-list");
+        else setScreen("practice");
+      }} />}
+
+      {screen === "topics" && (
+        <TopicPicker
+          selected={selectedTopics}
+          setSelected={setSelectedTopics}
+          onStart={() => setScreen("practice")}
+          onBack={() => setScreen("home")}
+        />
+      )}
+
+      {screen === "practice" && (
+        <Practice mode={mode} topics={selectedTopics} onDone={() => setScreen("home")} onUpdateStats={updateStats} />
+      )}
+
+      {screen === "reading-list" && (
+        <ItemList
+          items={READINGS}
+          title="Reading Passages"
+          onPick={(id) => { setSelectedId(id); setScreen("reading"); }}
+          onBack={() => setScreen("home")}
+        />
+      )}
+      {screen === "reading" && (
+        <Reading reading={READINGS.find(r => r.id === selectedId)}
+                 onDone={() => setScreen("reading-list")} onUpdateStats={(r) => updateStats(r, "reading")} />
+      )}
+
+      {screen === "dictation-list" && (
+        <ItemList
+          items={DICTATION_SETS}
+          title="Dictation"
+          subtitle="Listen and transcribe. Each set has 5 sentences."
+          onPick={(id) => { setSelectedId(id); setScreen("dictation"); }}
+          onBack={() => setScreen("home")}
+        />
+      )}
+      {screen === "dictation" && (
+        <Dictation set={DICTATION_SETS.find(d => d.id === selectedId)}
+                   onDone={() => setScreen("dictation-list")} onUpdateStats={(r) => updateStats(r, "dictation")} />
+      )}
+
+      {screen === "translate-list" && (
+        <ItemList
+          items={TRANSLATIONS}
+          title="Translation (English → Spanish)"
+          subtitle="35-word and 50-word AQA-style translations."
+          onPick={(id) => { setSelectedId(id); setScreen("translate"); }}
+          onBack={() => setScreen("home")}
+        />
+      )}
+      {screen === "translate" && (
+        <Translation task={TRANSLATIONS.find(t => t.id === selectedId)}
+                     onDone={() => setScreen("translate-list")} onUpdateStats={(r) => updateStats(r, "translate")} />
+      )}
+
+      {screen === "writing-list" && (
+        <ItemList
+          items={WRITING_TASKS}
+          title="Writing Tasks"
+          subtitle="Practice 90-word and 150-word AQA tasks. Compare against model answers — but ask Mum or your teacher to mark your work."
+          onPick={(id) => { setSelectedId(id); setScreen("writing"); }}
+          onBack={() => setScreen("home")}
+        />
+      )}
+      {screen === "writing" && (
+        <WritingTask task={WRITING_TASKS.find(w => w.id === selectedId)}
+                     onDone={() => setScreen("writing-list")} />
+      )}
+    </div>
+  );
+}
+
+function Header({ stats, onHome }) {
+  const acc = stats.attempted ? Math.round(100 * stats.correct / stats.attempted) : 0;
+  return (
+    <div className="mb-6">
+      <div className="flex items-center justify-between mb-2">
+        <h1 className="font-display text-3xl md:text-4xl" onClick={onHome} style={{cursor:"pointer"}}>
+          Español <span style={{color:"var(--terracotta)"}}>·</span> AQA 8692
+        </h1>
+        <div className="flex gap-2 items-center">
+          <span className="pill">🔥 {stats.streak}</span>
+          <span className="pill" style={{background:"var(--terracotta)"}}>{acc}%</span>
+        </div>
+      </div>
+      <p className="font-serif-italic text-sm" style={{color:"var(--terracotta)"}}>
+        Higher tier · heritage speaker · target: Dec 2026 mock → June 2027
+      </p>
+    </div>
+  );
+}
+
+function Home({ stats, onPick }) {
+  const modes = [
+    { id: "vocab", title: "Vocabulary", sub: "AQA-aligned, by topic", icon: "📚" },
+    { id: "reading", title: "Reading Comprehension", sub: "Higher-tier passages", icon: "📖" },
+    { id: "dictation", title: "Dictation", sub: "Audio playback · NEW AQA task", icon: "🎧" },
+    { id: "translate", title: "Translation Eng → Esp", sub: "35 & 50 word tasks", icon: "🔄" },
+    { id: "writing", title: "Writing Tasks", sub: "90 & 150 word essays", icon: "✍️" },
+    { id: "accents", title: "Accents Drill", sub: "Most common mark-losers", icon: "á" },
+    { id: "spelling", title: "Spelling Traps", sub: "b/v · h · c/s/z · ll/y", icon: "ß" },
+    { id: "agreement", title: "Gender & Agreement", sub: "Exceptions and apocope", icon: "♂♀" },
+    { id: "pretimpf", title: "Preterite vs Imperfect", sub: "Higher-tier contrast", icon: "↻" },
+    { id: "future", title: "Future / Conditional / Perfect", sub: "Range of tenses", icon: "→" },
+    { id: "subj", title: "Subjunctive", sub: "The grade 8-9 differentiator", icon: "∴" },
+  ];
+  return (
+    <div className="space-y-3 pop">
+      <div className="card p-4 mb-4">
+        <p className="font-serif-italic text-base" style={{color:"var(--ink)"}}>
+          AQA Spanish 8692 · 9 topics · all four exam skills
+        </p>
+        <p className="text-xs mt-1" style={{color:"#666"}}>
+          Stats save in this browser. Use the same device each time.
+        </p>
+      </div>
+      {modes.map(m => (
+        <button key={m.id} onClick={() => onPick(m.id)} className="tile w-full p-3 flex items-center gap-4 text-left">
+          <span className="font-display text-2xl w-10 text-center" style={{color:"var(--terracotta)"}}>{m.icon}</span>
+          <div className="flex-1">
+            <div className="font-display text-lg leading-tight">{m.title}</div>
+            <div className="text-xs" style={{color:"#666"}}>{m.sub}</div>
+          </div>
+          <span className="font-display text-lg">→</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function TopicPicker({ selected, setSelected, onStart, onBack }) {
+  const toggle = (key) => setSelected(s => s.includes(key) ? s.filter(t => t !== key) : [...s, key]);
+  const allKeys = Object.keys(TOPICS);
+  const allSelected = selected.length === allKeys.length;
+  const toggleAll = () => setSelected(allSelected ? [] : allKeys);
+
+  return (
+    <div className="pop">
+      <button onClick={onBack} className="btn-secondary px-4 py-2 mb-4 text-sm">← Back</button>
+      <div className="card p-4 mb-4">
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="font-display text-xl">Choose topics</h2>
+          <button onClick={toggleAll} className="text-sm underline" style={{color:"var(--terracotta)"}}>
+            {allSelected ? "Clear all" : "Select all"}
+          </button>
+        </div>
+        {Object.entries(THEMES).map(([tk, t]) => (
+          <div key={tk} className="mb-3">
+            <div className="text-xs uppercase tracking-wide mb-1 font-semibold" style={{color:"var(--plum)"}}>
+              {t.icon} {t.name}
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+              {Object.entries(TOPICS).filter(([k, v]) => v.theme === tk).map(([k, v]) => (
+                <div key={k} onClick={() => toggle(k)}
+                     className={`tile p-2 text-sm ${selected.includes(k) ? "selected" : ""}`}>
+                  <div className="font-semibold">{v.name}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <button onClick={onStart} disabled={selected.length === 0} className="btn-primary px-6 py-3 w-full">
+        {selected.length === 0 ? "Pick at least one topic" : `Start (${selected.length} topic${selected.length>1?"s":""})`}
+      </button>
+    </div>
+  );
+}
+
+function ItemList({ items, title, subtitle, onPick, onBack }) {
+  return (
+    <div className="pop">
+      <button onClick={onBack} className="btn-secondary px-4 py-2 mb-4 text-sm">← Back</button>
+      <h2 className="font-display text-2xl mb-1">{title}</h2>
+      {subtitle && <p className="text-sm mb-4" style={{color:"#666"}}>{subtitle}</p>}
+      <div className="space-y-3">
+        {items.map(r => (
+          <button key={r.id} onClick={() => onPick(r.id)} className="tile w-full p-3 text-left">
+            <div className="flex justify-between items-start gap-2">
+              <div className="flex-1">
+                <div className="font-display text-base leading-tight">{r.title || r.english?.slice(0, 60) + "..."}</div>
+                <div className="text-xs mt-1" style={{color:"#666"}}>
+                  {r.topic && <span className="topic-badge mr-2">{TOPICS[r.topic]?.short}</span>}
+                  {r.level && `${r.level} tier`}
+                  {r.words && ` · ${r.words} words`}
+                  {r.questions && ` · ${r.questions.length} qs`}
+                  {r.sentences && ` · ${r.sentences.length} sentences`}
+                </div>
+              </div>
+              <span className="font-display text-xl">→</span>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// VOCAB / TENSE / SPELLING PRACTICE (combined)
+// ============================================================
+function Practice({ mode, topics, onDone, onUpdateStats }) {
+  const SESSION = 10;
+  const [queue, setQueue] = useState([]);
+  const [idx, setIdx] = useState(0);
+  const [answer, setAnswer] = useState("");
+  const [feedback, setFeedback] = useState(null);
+  const [diffs, setDiffs] = useState([]);
+  const [score, setScore] = useState(0);
+  const [showHint, setShowHint] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    let items = [];
+    if (mode === "vocab") {
+      topics.forEach(t => {
+        VOCAB[t].forEach(([es, en]) => items.push({ es, en, topic: TOPICS[t].short }));
+      });
+      items = shuffle(items).slice(0, SESSION);
+    }
+    if (mode === "accents") items = shuffle(ACCENT_ITEMS).slice(0, SESSION);
+    if (mode === "spelling") items = shuffle(SPELLING_TRAPS).slice(0, SESSION);
+    if (mode === "agreement") items = shuffle(AGREEMENT_ITEMS).slice(0, SESSION);
+    if (mode === "pretimpf") items = shuffle(PRET_VS_IMPF).slice(0, SESSION);
+    if (mode === "future") items = shuffle(FUTURE_COND).slice(0, SESSION);
+    if (mode === "subj") items = shuffle(SUBJUNCTIVE).slice(0, SESSION);
+    setQueue(items);
+  }, [mode, topics]);
+
+  useEffect(() => { if (inputRef.current) inputRef.current.focus(); }, [idx, queue]);
+
+  if (queue.length === 0) return <div className="card p-6">Loading...</div>;
+
+  if (idx >= queue.length) {
+    const pct = Math.round(100 * score / queue.length);
+    const msg = pct >= 90 ? "¡Excelente! 🌟" : pct >= 70 ? "¡Muy bien! 👏" : pct >= 50 ? "Vamos mejorando" : "Sigue practicando";
+    return (
+      <div className="card p-6 text-center pop">
+        <div className="text-4xl mb-2">🎯</div>
+        <h2 className="font-display text-2xl mb-2">{msg}</h2>
+        <p className="text-lg mb-2">{score}/{queue.length}</p>
+        <div className="progress-bar mb-4 max-w-xs mx-auto"><div className="progress-fill" style={{width:`${pct}%`}}></div></div>
+        <div className="flex gap-3 justify-center">
+          <button onClick={() => window.location.reload()} className="btn-primary px-5 py-2">Again</button>
+          <button onClick={onDone} className="btn-secondary px-5 py-2">Home</button>
+        </div>
+      </div>
+    );
+  }
+
+  const cur = queue[idx];
+  let prompt, correct, subtitle, hint, note;
+
+  if (mode === "vocab") {
+    prompt = cur.en; correct = cur.es; subtitle = cur.topic; hint = `${cur.es.length} letters · "${cur.es[0]}..."`;
+  } else if (mode === "accents") {
+    prompt = cur.en; correct = cur.correct; subtitle = "Type with correct accents"; hint = `${cur.correct.length} letters`;
+  } else if (mode === "spelling") {
+    prompt = cur.hint; correct = cur.correct; subtitle = "Watch b/v, h, c/s/z, ll/y"; hint = `Starts with "${cur.correct[0]}"`;
+  } else if (mode === "agreement") {
+    prompt = cur.prompt; correct = cur.correct; subtitle = "Gender & agreement"; note = cur.note;
+    hint = `Starts with "${cur.correct.split(" ")[0]}"`;
+  } else if (mode === "pretimpf") {
+    prompt = cur.en; correct = cur.es; subtitle = "Preterite vs Imperfect"; note = cur.tense;
+    hint = `Starts with "${cur.es.split(" ")[0]}"`;
+  } else if (mode === "future") {
+    prompt = cur.en; correct = cur.es; subtitle = "Future / Conditional / Perfect"; note = cur.tense;
+    hint = `Starts with "${cur.es.split(" ")[0]}"`;
+  } else if (mode === "subj") {
+    prompt = cur.en; correct = cur.es; subtitle = "Subjunctive"; note = cur.trigger;
+    hint = `Starts with "${cur.es.split(" ")[0]}"`;
+  }
+
+  const submit = () => {
+    if (feedback) return;
+    if (!answer.trim()) return;
+    const right = exactMatch(answer, correct);
+    setFeedback(right ? "right" : "wrong");
+    if (!right) setDiffs(findDifferences(answer, correct));
+    if (right) setScore(s => s + 1);
+    onUpdateStats(right, mode);
+  };
+
+  const next = () => { setAnswer(""); setFeedback(null); setDiffs([]); setShowHint(false); setIdx(i => i + 1); };
+  const insertChar = (c) => { if (feedback) return; setAnswer(a => a + c); if (inputRef.current) inputRef.current.focus(); };
+  const handleKey = (e) => { if (e.key === "Enter") feedback ? next() : submit(); };
+
+  return (
+    <div className="pop">
+      <div className="flex items-center gap-3 mb-4">
+        <button onClick={onDone} className="btn-secondary px-3 py-1 text-sm">← Home</button>
+        <div className="progress-bar flex-1"><div className="progress-fill" style={{width:`${(idx/queue.length)*100}%`}}></div></div>
+        <span className="text-sm font-semibold">{idx+1}/{queue.length}</span>
+      </div>
+
+      <div className="card p-5 mb-4">
+        <div className="text-xs uppercase tracking-wide mb-2" style={{color:"var(--terracotta)"}}>{subtitle}</div>
+        <div className="font-display text-xl md:text-2xl mb-2">{prompt}</div>
+        {note && <div className="grammar-note mt-3 text-sm">💡 {note}</div>}
+      </div>
+
+      <input ref={inputRef} type="text" value={answer}
+        onChange={e => setAnswer(e.target.value)} onKeyDown={handleKey}
+        disabled={feedback !== null} placeholder="Escribe tu respuesta..."
+        className="input-field mb-3"
+        autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+
+      <div className="flex flex-wrap gap-1 mb-3">
+        {ACCENTS.map(c => <button key={c} onClick={() => insertChar(c)} className="accent-char">{c}</button>)}
+      </div>
+
+      {feedback === null && (
+        <div className="flex gap-2">
+          <button onClick={submit} className="btn-primary px-6 py-3 flex-1">Comprobar</button>
+          <button onClick={() => setShowHint(true)} className="btn-secondary px-4 py-3">Pista</button>
+          <button onClick={next} className="btn-secondary px-4 py-3">Saltar</button>
+        </div>
+      )}
+
+      {showHint && feedback === null && <div className="grammar-note mt-3 text-sm">💡 {hint}</div>}
+
+      {feedback === "right" && (
+        <div className="card feedback-correct p-4 mt-2 pop">
+          <div className="font-display text-lg mb-1">¡Correcto! ✓</div>
+          <div className="text-sm font-serif-italic">{correct}</div>
+          <button onClick={next} className="btn-primary px-6 py-2 mt-3 w-full">Siguiente →</button>
+        </div>
+      )}
+
+      {feedback === "wrong" && (
+        <div className="card feedback-wrong p-4 mt-2 shake">
+          <div className="font-display text-lg mb-1">Casi ✗</div>
+          <div className="text-base mb-1">You wrote: <em>{answer}</em></div>
+          <div className="text-base">Correct: <strong>{correct}</strong></div>
+          {diffs.length > 0 && <div className="mt-2 text-sm"><strong>Issue:</strong> {diffs.join(", ")}</div>}
+          <button onClick={next} className="btn-primary px-6 py-2 mt-3 w-full">Siguiente →</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// READING
+// ============================================================
+function Reading({ reading, onDone, onUpdateStats }) {
+  const [answers, setAnswers] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const submit = () => {
+    setSubmitted(true);
+    reading.questions.forEach((q, i) => onUpdateStats(answers[i] === q.correct));
+  };
+
+  const score = reading.questions.filter((q, i) => answers[i] === q.correct).length;
+  const total = reading.questions.length;
+
+  return (
+    <div className="pop">
+      <button onClick={onDone} className="btn-secondary px-4 py-2 mb-4 text-sm">← Back</button>
+      <div className="card p-4 mb-4">
+        <span className="topic-badge mr-2">{TOPICS[reading.topic]?.short}</span>
+        <h2 className="font-display text-xl mt-2 mb-3">{reading.title}</h2>
+        <div className="reading-text">
+          {reading.text.split("\n\n").map((p, i) => <p key={i}>{p}</p>)}
+        </div>
+      </div>
+      <div className="space-y-3">
+        {reading.questions.map((q, i) => {
+          const userAns = answers[i];
+          const isRight = userAns === q.correct;
+          return (
+            <div key={i} className="card p-3">
+              <div className="font-semibold mb-2 text-sm">{i+1}. {q.q}</div>
+              <div className="space-y-2">
+                {q.choices.map((c, j) => {
+                  let cls = "tile p-2 text-sm";
+                  if (submitted) {
+                    if (j === q.correct) cls += " feedback-correct";
+                    else if (j === userAns && j !== q.correct) cls += " feedback-wrong";
+                  } else if (userAns === j) cls += " selected";
+                  return (
+                    <div key={j} onClick={() => !submitted && setAnswers(a => ({...a, [i]: j}))}
+                         className={cls} style={submitted ? { cursor: "default" } : {}}>
+                      <span className="font-semibold mr-2">{String.fromCharCode(65+j)}.</span>{c}
+                    </div>
+                  );
+                })}
+              </div>
+              {submitted && (
+                <div className="grammar-note mt-2 text-sm">
+                  {isRight ? "✓ " : "✗ "}<strong>{isRight ? "Correct" : "Answer: " + String.fromCharCode(65+q.correct)}</strong> — {q.explain}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      {!submitted ? (
+        <button onClick={submit} disabled={Object.keys(answers).length < total}
+                className="btn-primary px-6 py-3 w-full mt-4">
+          {Object.keys(answers).length < total
+            ? `Answer all (${Object.keys(answers).length}/${total})` : "Check answers"}
+        </button>
+      ) : (
+        <div className="card p-4 mt-4 text-center">
+          <div className="font-display text-2xl mb-2">{score}/{total}</div>
+          <button onClick={onDone} className="btn-primary px-5 py-2 mt-2">Done</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// DICTATION
+// ============================================================
+function Dictation({ set, onDone, onUpdateStats }) {
+  const { speak, available } = useSpanishSpeech();
+  const [idx, setIdx] = useState(0);
+  const [answer, setAnswer] = useState("");
+  const [feedback, setFeedback] = useState(null);
+  const [score, setScore] = useState(0);
+  const [playCount, setPlayCount] = useState(0);
+  const [showText, setShowText] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => { if (inputRef.current) inputRef.current.focus(); }, [idx]);
+
+  if (idx >= set.sentences.length) {
+    const pct = Math.round(100 * score / set.sentences.length);
+    return (
+      <div className="card p-6 text-center pop">
+        <div className="text-4xl mb-2">🎧</div>
+        <h2 className="font-display text-2xl mb-2">¡Hecho!</h2>
+        <p className="text-lg mb-2">{score}/{set.sentences.length}</p>
+        <div className="progress-bar mb-4 max-w-xs mx-auto"><div className="progress-fill" style={{width:`${pct}%`}}></div></div>
+        <div className="flex gap-3 justify-center">
+          <button onClick={() => window.location.reload()} className="btn-primary px-5 py-2">Again</button>
+          <button onClick={onDone} className="btn-secondary px-5 py-2">Back</button>
+        </div>
+      </div>
+    );
+  }
+
+  const current = set.sentences[idx];
+
+  const handlePlay = (rate = 0.85) => {
+    speak(current, rate);
+    setPlayCount(p => p + 1);
+  };
+
+  const submit = () => {
+    if (feedback) return;
+    if (!answer.trim()) return;
+    const right = exactMatch(answer, current);
+    setFeedback(right ? "right" : "wrong");
+    if (right) setScore(s => s + 1);
+    onUpdateStats(right);
+  };
+
+  const next = () => {
+    setAnswer(""); setFeedback(null); setPlayCount(0); setShowText(false);
+    setIdx(i => i + 1);
+  };
+
+  const insertChar = (c) => { if (feedback) return; setAnswer(a => a + c); if (inputRef.current) inputRef.current.focus(); };
+
+  const issues = feedback === "wrong" ? findDifferences(answer, current) : [];
+
+  return (
+    <div className="pop">
+      <div className="flex items-center gap-3 mb-4">
+        <button onClick={onDone} className="btn-secondary px-3 py-1 text-sm">← Back</button>
+        <div className="progress-bar flex-1"><div className="progress-fill" style={{width:`${(idx/set.sentences.length)*100}%`}}></div></div>
+        <span className="text-sm font-semibold">{idx+1}/{set.sentences.length}</span>
+      </div>
+
+      <div className="card p-5 mb-4">
+        <div className="text-xs uppercase tracking-wide mb-2" style={{color:"var(--terracotta)"}}>
+          Dictation · {set.title}
+        </div>
+        <p className="text-sm mb-3" style={{color:"#666"}}>
+          Listen and type exactly what you hear, including accents and punctuation.
+        </p>
+        {!available && (
+          <div className="grammar-note text-sm mb-3" style={{borderColor: "var(--rose)"}}>
+            ⚠️ Your browser may not have Spanish voice support. Try Chrome, Safari, or Edge.
+          </div>
+        )}
+        <div className="flex gap-2 flex-wrap items-center">
+          <button onClick={() => handlePlay(0.85)} className="play-btn" disabled={!available}>
+            ▶ Normal speed
+          </button>
+          <button onClick={() => handlePlay(0.65)} className="play-btn" disabled={!available}
+                  style={{background: "var(--olive)"}}>
+            ▶ Slow
+          </button>
+          <span className="text-xs" style={{color:"#666"}}>Played {playCount} times</span>
+        </div>
+        {playCount >= 3 && !showText && (
+          <button onClick={() => setShowText(true)} className="text-xs underline mt-3" style={{color:"var(--plum)"}}>
+            Show text (after 3 plays)
+          </button>
+        )}
+        {showText && (
+          <div className="grammar-note mt-3 text-sm font-serif-italic">
+            📝 {current}
+          </div>
+        )}
+      </div>
+
+      <input ref={inputRef} type="text" value={answer}
+        onChange={e => setAnswer(e.target.value)}
+        onKeyDown={e => e.key === "Enter" && (feedback ? next() : submit())}
+        disabled={feedback !== null}
+        placeholder="Escribe lo que oyes..."
+        className="input-field mb-3"
+        autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+
+      <div className="flex flex-wrap gap-1 mb-3">
+        {ACCENTS.map(c => <button key={c} onClick={() => insertChar(c)} className="accent-char">{c}</button>)}
+      </div>
+
+      {feedback === null && (
+        <button onClick={submit} className="btn-primary px-6 py-3 w-full">Comprobar</button>
+      )}
+
+      {feedback === "right" && (
+        <div className="card feedback-correct p-4 mt-2 pop">
+          <div className="font-display text-lg mb-1">¡Perfecto! ✓</div>
+          <button onClick={next} className="btn-primary px-6 py-2 mt-2 w-full">Siguiente →</button>
+        </div>
+      )}
+
+      {feedback === "wrong" && (
+        <div className="card feedback-wrong p-4 mt-2">
+          <div className="font-display text-lg mb-2">Casi ✗</div>
+          <div className="text-sm mb-1">You wrote:</div>
+          <div className="text-base mb-2 font-serif-italic">{answer}</div>
+          <div className="text-sm mb-1">Correct:</div>
+          <div className="text-base font-serif-italic"><strong>{current}</strong></div>
+          {issues.length > 0 && <div className="mt-2 text-sm"><strong>Issue:</strong> {issues.join(", ")}</div>}
+          <button onClick={next} className="btn-primary px-6 py-2 mt-3 w-full">Siguiente →</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// TRANSLATION
+// ============================================================
+function Translation({ task, onDone, onUpdateStats }) {
+  const [answer, setAnswer] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const textareaRef = useRef(null);
+
+  const insertChar = (c) => {
+    if (submitted) return;
+    setAnswer(a => a + c);
+    if (textareaRef.current) textareaRef.current.focus();
+  };
+
+  const submit = () => {
+    setSubmitted(true);
+    // Approximate scoring: count keywords matched
+    const lower = answer.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const matched = task.keywords.filter(kw => lower.includes(kw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))).length;
+    onUpdateStats(matched >= task.keywords.length * 0.7);
+  };
+
+  const lower = answer.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const matchedKeywords = task.keywords.map(kw => ({
+    kw,
+    matched: lower.includes(kw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
+  }));
+
+  return (
+    <div className="pop">
+      <button onClick={onDone} className="btn-secondary px-4 py-2 mb-4 text-sm">← Back</button>
+
+      <div className="card p-4 mb-4">
+        <div className="flex justify-between items-start mb-2">
+          <span className="topic-badge">{TOPICS[task.topic]?.short}</span>
+          <span className="pill" style={{background:"var(--terracotta)"}}>{task.level} words</span>
+        </div>
+        <div className="text-xs uppercase tracking-wide mb-2 mt-2" style={{color:"var(--terracotta)"}}>
+          Translate to Spanish
+        </div>
+        <div className="reading-text">{task.english}</div>
+      </div>
+
+      <textarea ref={textareaRef} value={answer}
+        onChange={e => setAnswer(e.target.value)}
+        disabled={submitted}
+        placeholder="Escribe tu traducción aquí..."
+        rows={5}
+        className="input-field mb-2"
+        autoComplete="off" autoCorrect="off" spellCheck="false" />
+
+      <div className="flex justify-between items-center mb-3 text-sm">
+        <span className="word-counter" style={{color:"#666"}}>Words: {wordCount(answer)}</span>
+        {!submitted && <span className="word-counter" style={{color:"#666"}}>Target: ~{task.level}</span>}
+      </div>
+
+      <div className="flex flex-wrap gap-1 mb-3">
+        {ACCENTS.map(c => <button key={c} onClick={() => insertChar(c)} className="accent-char">{c}</button>)}
+      </div>
+
+      {!submitted ? (
+        <button onClick={submit} disabled={!answer.trim()} className="btn-primary px-6 py-3 w-full">
+          Check translation
+        </button>
+      ) : (
+        <>
+          <div className="card p-4 mb-3">
+            <div className="font-display text-lg mb-2">Your translation</div>
+            <div className="reading-text">{answer}</div>
+          </div>
+
+          <div className="card p-4 mb-3">
+            <div className="font-display text-lg mb-2">Model translation</div>
+            <div className="model-answer">{task.spanish_model}</div>
+          </div>
+
+          <div className="card p-4 mb-3">
+            <div className="font-display text-lg mb-2">Key structures to look for</div>
+            <ul className="text-sm space-y-1">
+              {matchedKeywords.map((mk, i) => (
+                <li key={i} className="flex items-center gap-2">
+                  <span style={{color: mk.matched ? "var(--olive)" : "var(--rose)"}}>
+                    {mk.matched ? "✓" : "✗"}
+                  </span>
+                  <span className="font-serif-italic">{mk.kw}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="card p-4 mb-3">
+            <div className="font-display text-lg mb-2">Grammar notes</div>
+            <ul className="text-sm space-y-2">
+              {task.notes.map((n, i) => <li key={i} className="grammar-note">💡 {n}</li>)}
+            </ul>
+          </div>
+
+          <div className="flex gap-2">
+            <button onClick={() => { setAnswer(""); setSubmitted(false); }} className="btn-secondary px-5 py-2 flex-1">
+              Try again
+            </button>
+            <button onClick={onDone} className="btn-primary px-5 py-2 flex-1">Done</button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ============================================================
+// WRITING TASK
+// ============================================================
+function WritingTask({ task, onDone }) {
+  const [answer, setAnswer] = useState("");
+  const [showModel, setShowModel] = useState(false);
+  const [showRubric, setShowRubric] = useState(true);
+  const textareaRef = useRef(null);
+  const wc = wordCount(answer);
+  const target = task.words;
+  const inRange = wc >= target * 0.85 && wc <= target * 1.15;
+
+  const insertChar = (c) => {
+    setAnswer(a => a + c);
+    if (textareaRef.current) textareaRef.current.focus();
+  };
+
+  return (
+    <div className="pop">
+      <button onClick={onDone} className="btn-secondary px-4 py-2 mb-4 text-sm">← Back</button>
+
+      <div className="card p-4 mb-4">
+        <div className="flex justify-between items-start mb-2">
+          <span className="topic-badge">{TOPICS[task.topic]?.short}</span>
+          <span className="pill" style={{background:"var(--terracotta)"}}>{task.words} words · Higher</span>
+        </div>
+        <h2 className="font-display text-xl mt-2">{task.title}</h2>
+        <p className="text-sm mt-2 mb-3">{task.prompt}</p>
+        <ul className="text-sm space-y-1 ml-2">
+          {task.bullets.map((b, i) => <li key={i}>• {b}</li>)}
+        </ul>
+      </div>
+
+      {showRubric && (
+        <div className="card p-4 mb-4" style={{background: "var(--paper)"}}>
+          <div className="flex justify-between items-center mb-2">
+            <div className="font-display text-lg">Higher-tier checklist</div>
+            <button onClick={() => setShowRubric(false)} className="text-xs underline" style={{color:"#666"}}>hide</button>
+          </div>
+          <ul className="text-sm space-y-1">
+            {task.rubric.map((r, i) => <li key={i}>☐ {r}</li>)}
+          </ul>
+        </div>
+      )}
+
+      <textarea ref={textareaRef} value={answer}
+        onChange={e => setAnswer(e.target.value)}
+        placeholder="Escribe tu respuesta aquí..."
+        rows={10}
+        className="input-field mb-2"
+        autoComplete="off" autoCorrect="off" spellCheck="false" />
+
+      <div className="flex justify-between items-center mb-3 text-sm">
+        <span className="word-counter" style={{color: inRange ? "var(--olive)" : "#666"}}>
+          Words: {wc} / target {target} ({Math.round(target*0.85)}-{Math.round(target*1.15)})
+        </span>
+        {inRange && <span style={{color:"var(--olive)"}}>✓ In range</span>}
+      </div>
+
+      <div className="flex flex-wrap gap-1 mb-3">
+        {ACCENTS.map(c => <button key={c} onClick={() => insertChar(c)} className="accent-char">{c}</button>)}
+      </div>
+
+      <div className="card p-3 mb-3" style={{background: "var(--cream)", borderStyle: "dashed"}}>
+        <p className="text-xs font-serif-italic">
+          ⚠️ The app can't reliably mark free writing. Compare against the model below, then ask Mum
+          or your Spanish teacher to mark your work properly.
+        </p>
+      </div>
+
+      <button onClick={() => setShowModel(s => !s)} className="btn-secondary px-5 py-2 w-full mb-3">
+        {showModel ? "Hide model answer" : "Show model answer"}
+      </button>
+
+      {showModel && (
+        <div className="card p-4 mb-3">
+          <div className="font-display text-lg mb-2">Model answer</div>
+          <div className="model-answer whitespace-pre-line">{task.model}</div>
+          <p className="text-xs mt-3" style={{color:"#666"}}>
+            Word count: {wordCount(task.model)}
+          </p>
+        </div>
+      )}
+
+      <button onClick={onDone} className="btn-primary px-5 py-2 w-full">Done</button>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
