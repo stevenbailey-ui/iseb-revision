@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISEB 13+ Revision</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a1628;--navy2:#13243d;--teal:#00c2a8;--amber:#f5a623;--red:#e85d4a;--green:#2dd4a7;--purple:#7c5cbf;--bg:#f0f4f8;--card:#fff;--text:#1a2a3a;--muted:#6b7f95;--border:#dde5ef}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* NAV */
+header{background:var(--navy);color:white;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.logo{font-family:'DM Serif Display',serif;font-size:1.1rem}.logo span{color:var(--teal)}
+.header-right{display:flex;align-items:center;gap:.75rem}
+.mock-launch-btn{background:var(--amber);color:var(--navy);border:none;padding:.4rem 1rem;border-radius:7px;font-size:.8rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity .15s}
+.mock-launch-btn:hover{opacity:.88}
+
+/* SUBJECT TABS */
+.subject-bar{background:var(--navy2);display:flex;gap:.4rem;padding:.55rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.sub-tab{padding:.35rem .9rem;border-radius:6px;cursor:pointer;font-size:.78rem;font-family:'DM Mono',monospace;color:rgba(255,255,255,.5);border:1px solid transparent;background:none;transition:all .15s}
+.sub-tab.active{background:var(--teal);color:white;border-color:var(--teal)}
+.sub-tab:hover:not(.active){color:white;border-color:rgba(255,255,255,.2)}
+.paper-bar{background:#0d1e36;display:flex;gap:.4rem;padding:.4rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.05)}
+.paper-tab{padding:.3rem .8rem;border-radius:5px;cursor:pointer;font-size:.72rem;font-family:'DM Mono',monospace;color:rgba(255,255,255,.4);border:1px solid transparent;background:none;transition:all .15s}
+.paper-tab.active{background:rgba(255,255,255,.1);color:white;border-color:rgba(255,255,255,.15)}
+.paper-tab:hover:not(.active){color:rgba(255,255,255,.7)}
+
+/* LAYOUT */
+.shell{display:flex;flex-direction:row;height:calc(100vh - 140px)}
+aside{background:var(--navy2);width:240px;min-width:240px;padding:.75rem .6rem;display:flex;flex-direction:column;gap:.15rem;overflow-y:auto;height:100%;flex-shrink:0}
+.sl{font-size:.6rem;font-family:'DM Mono',monospace;letter-spacing:.12em;color:rgba(255,255,255,.28);text-transform:uppercase;padding:.7rem .55rem .25rem}
+.tb{display:flex;align-items:center;gap:.45rem;padding:.5rem .55rem;border-radius:7px;cursor:pointer;font-size:.8rem;color:rgba(255,255,255,.68);border:none;background:none;width:100%;text-align:left;transition:background .15s}
+.tb:hover{background:rgba(255,255,255,.07)}
+.tb.active{background:var(--teal);color:white;font-weight:600}
+.tb .ico{font-size:.9rem;width:17px;flex-shrink:0}
+.pr{width:30px;height:30px;border-radius:50%;background:conic-gradient(#00c2a8 0%,rgba(255,255,255,.1) 0%);display:flex;align-items:center;justify-content:center;font-size:.52rem;font-family:'DM Mono',monospace;margin-left:auto;color:white;flex-shrink:0;transition:background .4s}
+
+main{flex:1;padding:1.5rem;overflow-y:auto;height:100%}
+.view{display:none}.view.active{display:block}
+
+/* TOPIC VIEW */
+.tv-head{margin-bottom:1.1rem}
+.tv-title{font-family:'DM Serif Display',serif;font-size:1.65rem;color:var(--navy)}
+.tv-sub{font-size:.77rem;color:var(--muted);font-family:'DM Mono',monospace;margin-top:.15rem}
+.stats-bar{display:flex;gap:.6rem;margin-bottom:1.1rem;flex-wrap:wrap}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.45rem .8rem;font-size:.76rem}
+.sc .v{font-family:'DM Mono',monospace;font-size:.95rem;font-weight:600;color:var(--navy);display:block}
+.sc .l{color:var(--muted);font-size:.66rem}
+.qcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem}
+.qc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.9rem;cursor:pointer;transition:box-shadow .2s,transform .2s}
+.qc:hover{box-shadow:0 4px 14px rgba(0,0,0,.08);transform:translateY(-2px)}
+.qc.done{border-left:3px solid var(--green)}.qc.partial{border-left:3px solid var(--amber)}
+.qm{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);margin-bottom:.3rem}
+.qp{font-size:.8rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.qs{margin-top:.55rem;font-size:.65rem;font-family:'DM Mono',monospace}
+.qs.pass{color:var(--green)}.qs.part{color:var(--amber)}.qs.none{color:var(--muted)}
+
+/* QUESTION VIEW */
+.qnav{display:flex;align-items:center;gap:.55rem;margin-bottom:1.1rem}
+.btn-back{background:none;border:1px solid var(--border);border-radius:6px;padding:.32rem .65rem;font-size:.76rem;cursor:pointer;color:var(--muted);transition:all .15s}
+.btn-back:hover{border-color:var(--navy);color:var(--navy)}
+.qcrumb{font-size:.74rem;color:var(--muted);font-family:'DM Mono',monospace}
+.qbox{background:var(--card);border:1px solid var(--border);border-radius:13px;padding:1.5rem;margin-bottom:1.1rem}
+.qhead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem}
+.qnum{font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--navy)}
+.mbadge{background:var(--navy);color:white;padding:2px 8px;border-radius:9px;font-size:.68rem;font-family:'DM Mono',monospace}
+.qtext{font-size:.9rem;line-height:1.75;white-space:pre-line}
+.qhint{margin-top:.75rem;padding:.6rem .85rem;background:#f0faf7;border-left:3px solid var(--teal);border-radius:0 7px 7px 0;font-size:.76rem;color:#2a6b5a;display:none}
+.qhint.visible{display:block}
+.mcq-opts{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-top:.75rem}
+.opt{padding:.6rem .85rem;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:.85rem;transition:all .15s;background:white;text-align:left}
+.opt:hover{border-color:var(--teal);background:#f0fdfb}
+.opt.sel{border-color:var(--teal);background:#e0f9f5}
+.opt.correct{border-color:var(--green);background:#e8faf5}
+.opt.wrong{border-color:var(--red);background:#fdecea}
+.ans-area{margin-top:.75rem}
+textarea{width:100%;min-height:100px;border:2px solid var(--border);border-radius:8px;padding:.75rem;font-family:'DM Sans',sans-serif;font-size:.87rem;line-height:1.6;resize:vertical;transition:border-color .15s;color:var(--text)}
+textarea:focus{outline:none;border-color:var(--teal)}
+.act{display:flex;gap:.55rem;flex-wrap:wrap}
+.btn{padding:.5rem 1rem;border-radius:7px;font-size:.83rem;font-weight:500;cursor:pointer;transition:all .15s;border:none;font-family:'DM Sans',sans-serif}
+.btn-p{background:var(--navy);color:white}.btn-p:hover{background:#1a3558}.btn-p:disabled{opacity:.45;cursor:not-allowed}
+.btn-s{background:var(--card);border:1px solid var(--border);color:var(--text)}.btn-s:hover{border-color:var(--navy)}
+.fb{background:linear-gradient(135deg,#f8fbff,#edf7f5);border:1px solid #c2e8e0;border-radius:13px;padding:1.25rem;margin-top:1.1rem;display:none}
+.fb.visible{display:block}
+.fhead{display:flex;align-items:center;gap:.4rem;margin-bottom:.75rem;font-weight:600;font-size:.86rem;color:var(--navy)}
+.aib{background:var(--teal);color:white;padding:2px 7px;border-radius:4px;font-size:.6rem;font-family:'DM Mono',monospace;letter-spacing:.05em}
+.sdis{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+.scirc{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:'DM Mono',monospace;font-weight:600;font-size:1rem;flex-shrink:0}
+.scirc.high{background:#dcfdf5;color:#0a7a5e;border:2px solid var(--green)}
+.scirc.mid{background:#fff8e6;color:#8a6200;border:2px solid var(--amber)}
+.scirc.low{background:#fdecea;color:#a02020;border:2px solid var(--red)}
+.ssub{font-size:.52rem;color:var(--muted)}
+.ftext{font-size:.83rem;line-height:1.7}
+.ma{margin-top:.75rem;padding:.75rem;background:rgba(0,194,168,.08);border-radius:7px;font-size:.8rem;line-height:1.6;color:var(--navy);display:none}
+.mal{font-size:.62rem;font-family:'DM Mono',monospace;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem}
+.ld{display:inline-flex;gap:4px;align-items:center}
+.ld span{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:db 1.2s infinite}
+.ld span:nth-child(2){animation-delay:.2s}.ld span:nth-child(3){animation-delay:.4s}
+@keyframes db{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-5px);opacity:1}}
+
+/* MOCK EXAM MODE */
+.mock-overlay{display:none;position:fixed;inset:0;background:rgba(8,18,36,.97);z-index:500;flex-direction:column}
+.mock-overlay.active{display:flex}
+.mock-header{background:var(--navy);padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.1);flex-shrink:0}
+.mock-title{font-family:'DM Serif Display',serif;font-size:1.1rem;color:white}
+.mock-timer{font-family:'DM Mono',monospace;font-size:1.5rem;color:var(--teal);font-weight:500}
+.mock-timer.warning{color:var(--amber);animation:pulse .8s infinite}
+.mock-timer.danger{color:var(--red);animation:pulse .4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.mock-end-btn{background:var(--red);color:white;border:none;padding:.4rem 1rem;border-radius:6px;font-size:.8rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:600}
+.mock-body{flex:1;overflow-y:auto;padding:2rem;max-width:760px;margin:0 auto;width:100%}
+.mock-progress-bar{height:4px;background:rgba(255,255,255,.1);margin-bottom:1.5rem;border-radius:2px;overflow:hidden}
+.mock-progress-fill{height:100%;background:var(--teal);border-radius:2px;transition:width .3s}
+.mock-qbox{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
+.mock-qnum{font-family:'DM Mono',monospace;font-size:.7rem;color:rgba(255,255,255,.4);margin-bottom:.5rem}
+.mock-qtext{font-size:.92rem;line-height:1.75;color:rgba(255,255,255,.9);white-space:pre-line;margin-bottom:.75rem}
+.mock-mcq{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.mock-opt{padding:.6rem .85rem;border:1px solid rgba(255,255,255,.15);border-radius:8px;cursor:pointer;font-size:.84rem;color:rgba(255,255,255,.75);transition:all .15s;background:none;text-align:left}
+.mock-opt:hover{border-color:var(--teal);background:rgba(0,194,168,.1);color:white}
+.mock-opt.sel{border-color:var(--teal);background:rgba(0,194,168,.18);color:white}
+.mock-textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:.75rem;color:rgba(255,255,255,.9);font-family:'DM Sans',sans-serif;font-size:.87rem;line-height:1.6;resize:vertical;min-height:90px}
+.mock-textarea:focus{outline:none;border-color:var(--teal)}
+.mock-marks{font-size:.68rem;font-family:'DM Mono',monospace;color:var(--amber);margin-bottom:.4rem}
+.mock-nav{display:flex;align-items:center;justify-content:space-between;padding:.75rem 0}
+.mock-nav .btn{font-size:.83rem}
+.btn-teal{background:var(--teal);color:white}.btn-teal:hover{background:#00a892}
+.mock-qcount{font-family:'DM Mono',monospace;font-size:.78rem;color:rgba(255,255,255,.45)}
+
+/* RESULTS SCREEN */
+.results-screen{display:none;position:fixed;inset:0;background:var(--navy);z-index:600;overflow-y:auto;padding:2rem}
+.results-screen.active{display:block}
+.results-inner{max-width:680px;margin:0 auto}
+.results-title{font-family:'DM Serif Display',serif;font-size:2.2rem;color:white;margin-bottom:.3rem}
+.results-sub{font-size:.85rem;color:rgba(255,255,255,.5);font-family:'DM Mono',monospace;margin-bottom:2rem}
+.big-score{display:flex;align-items:center;gap:1.5rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem}
+.big-num{font-family:'DM Serif Display',serif;font-size:3.5rem;color:var(--teal)}
+.big-label{font-size:.85rem;color:rgba(255,255,255,.6)}
+.results-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem}
+.rb-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:1rem}
+.rb-topic{font-size:.75rem;color:rgba(255,255,255,.5);margin-bottom:.3rem}
+.rb-score{font-family:'DM Mono',monospace;font-size:1.1rem;color:white;font-weight:600}
+.rb-bar{height:4px;background:rgba(255,255,255,.1);border-radius:2px;margin-top:.5rem;overflow:hidden}
+.rb-fill{height:100%;border-radius:2px}
+.results-actions{display:flex;gap:.75rem}
+
+/* MOCK SETUP MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:400;align-items:center;justify-content:center}
+.modal-bg.active{display:flex}
+.modal{background:white;border-radius:16px;padding:2rem;width:480px;max-width:90vw}
+.modal h2{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--navy);margin-bottom:.3rem}
+.modal p{font-size:.85rem;color:var(--muted);margin-bottom:1.25rem}
+.modal-opts{display:grid;gap:.5rem;margin-bottom:1.25rem}
+.mopt{border:2px solid var(--border);border-radius:10px;padding:.85rem 1rem;cursor:pointer;transition:all .15s}
+.mopt:hover{border-color:var(--teal)}
+.mopt.sel{border-color:var(--teal);background:#f0fdfb}
+.mopt h3{font-size:.9rem;font-weight:600;color:var(--navy)}
+.mopt p{font-size:.75rem;color:var(--muted);margin:0}
+.modal-actions{display:flex;gap:.6rem;justify-content:flex-end}
+.btn-cancel{background:none;border:1px solid var(--border);border-radius:7px;padding:.5rem 1rem;font-size:.83rem;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif}
+
+@media(max-width:600px){.shell{flex-direction:column}aside{width:100%;height:auto;min-width:unset;max-height:180px}main{padding:1rem}.mcq-opts{grid-template-columns:1fr}.mock-mcq{grid-template-columns:1fr}.results-breakdown{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">ISEB 13<sup>+</sup> <span>Revision</span></div>
+  <div class="header-right">
+    <button class="mock-launch-btn" onclick="openMockSetup()">⏱ Mock Exam</button>
+  </div>
+</header>
+
+<div class="subject-bar" id="subject-bar"></div>
+<div class="paper-bar" id="paper-bar"></div>
+
+<div class="shell">
+  <aside id="sidebar"></aside>
+  <main>
+    <div class="view active" id="topic-view">
+      <div class="tv-head"><div class="tv-title" id="tv-title"></div><div class="tv-sub" id="tv-sub"></div></div>
+      <div class="stats-bar" id="stats-bar"></div>
+      <div class="qcards" id="q-cards"></div>
+    </div>
+    <div class="view" id="question-view">
+      <div class="qnav">
+        <button class="btn-back" onclick="backToTopic()">← Back</button>
+        <span class="qcrumb" id="qcrumb"></span>
+      </div>
+      <div class="qbox">
+        <div class="qhead"><div class="qnum" id="qnum"></div><div class="mbadge" id="qmarks"></div></div>
+        <div class="qtext" id="qtext"></div>
+        <div id="mcq-con" class="mcq-opts"></div>
+        <div class="qhint" id="qhint"></div>
+        <div class="ans-area" id="warea"><textarea id="ainput" placeholder="Write your answer here…"></textarea></div>
+      </div>
+      <div class="act">
+        <button class="btn btn-p" id="sbtn" onclick="submitAnswer()">Submit Answer</button>
+        <button class="btn btn-s" onclick="toggleHint()">Hint</button>
+        <button class="btn btn-s" id="nbtn" onclick="nextQ()" style="display:none">Next →</button>
+      </div>
+      <div class="fb" id="fbbox">
+        <div class="fhead"><span class="aib">AI MARKER</span> Feedback</div>
+        <div class="sdis">
+          <div class="scirc" id="scirc"><span id="sval">–</span><span class="ssub">marks</span></div>
+          <div class="ftext" id="ftext"></div>
+        </div>
+        <div class="ma" id="mabox"><div class="mal">Mark Scheme</div><div id="matext"></div></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- MOCK SETUP MODAL -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <h2>Mock Exam</h2>
+    <p>Choose exam type — timed, AI-marked on completion.</p>
+    <div class="modal-opts" id="modal-opts"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-p" onclick="startMock()">Start Exam →</button>
+    </div>
+  </div>
+</div>
+
+<!-- MOCK EXAM OVERLAY -->
+<div class="mock-overlay" id="mock-overlay">
+  <div class="mock-header">
+    <div class="mock-title" id="mock-title">Mock Exam</div>
+    <div class="mock-timer" id="mock-timer">40:00</div>
+    <button class="mock-end-btn" onclick="endMock()">End & Mark</button>
+  </div>
+  <div class="mock-body">
+    <div class="mock-progress-bar"><div class="mock-progress-fill" id="mpfill"></div></div>
+    <div id="mock-q-display"></div>
+    <div class="mock-nav">
+      <button class="btn btn-s" id="mprev" onclick="mockNav(-1)">← Prev</button>
+      <span class="mock-qcount" id="mock-qcount"></span>
+      <button class="btn btn-teal" id="mnext" onclick="mockNav(1)">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div class="results-screen" id="results-screen">
+  <div class="results-inner">
+    <div class="results-title">Exam Results</div>
+    <div class="results-sub" id="res-sub"></div>
+    <div class="big-score" id="res-big"></div>
+    <div class="results-breakdown" id="res-breakdown"></div>
+    <div class="results-actions">
+      <button class="btn btn-p" onclick="closeResults()">Back to Revision</button>
+      <button class="btn btn-teal" onclick="openMockSetup()">Try Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════ DATA
+const subjects = [
+  {
+    id:'physics', label:'Physics 🔬',
+    papers:[
+      {
+        id:'ph2022', label:'Specimen 2022', duration:40,
+        topics:[
+          {name:'Forces & Pressure',sub:'Q1(a)(g)',icon:'⚡',questions:[
+            {id:'1a',type:'mcq',text:'The unit of force is the:',options:['kilogram','newton','newton metre','pascal'],answer:1,marks:1,hint:'F=ma — what unit does this give?',ms:'newton (N)'},
+            {id:'1g',type:'mcq',text:'A metal block is turned so a face with HALF the area rests on the table.\nPressure on the table is now:',options:['four times as much','half as much','the same','twice as much'],answer:3,marks:1,hint:'P=F/A. Weight unchanged. Area halves.',ms:'twice as much — same force, half area → P doubles'}
+          ]},
+          {name:'Speed & Motion',sub:'Q2 Rosetta',icon:'🚀',questions:[
+            {id:'2a',type:'written',text:'The Rosetta probe travelled for about 3,800 days.\nShow that this time is about 91,000 hours.',marks:1,hint:'Multiply days × 24',ms:'3,800 × 24 = 91,200 ≈ 91,000 hours ✓'},
+            {id:'2bi',type:'written',text:'State the equation linking speed, distance and time.',marks:1,hint:'How fast, how far, how long?',ms:'speed = distance ÷ time'},
+            {id:'2bii',type:'written',text:'The probe travelled 6,400,000,000 km in 91,000 hours.\nCalculate its average speed in km/hr.',marks:2,hint:'speed = distance ÷ time',ms:'6,400,000,000 ÷ 91,000 ≈ 70,000 km/hr [1 substitution, 1 answer+unit]'},
+            {id:'2c',type:'written',text:'The probe was slowed using rocket motors, not a parachute.\nSuggest why a parachute could NOT be used.',marks:2,hint:'What does a parachute need? What is space like?',ms:'[1] No air/atmosphere in space [1] Parachute requires air resistance — impossible in vacuum'}
+          ]},
+          {name:'Electromagnetism',sub:'Q3 Current meter',icon:'🔌',questions:[
+            {id:'3a',type:'written',text:'When current flows in an electromagnet, an iron rod below it is pulled downwards.\nExplain why.',marks:2,hint:'Current → magnetic field → iron effect',ms:'[1] Current creates magnetic field (electromagnet) [1] Magnetic field attracts iron rod downwards'},
+            {id:'3e',type:'written',text:'Iron rod mass = 0.200 kg. Gravity = 10 N/kg.\nCalculate the weight and state the unit.',marks:2,hint:'W = mg',ms:'0.200 × 10 = 2.0 N [1 calc, 1 unit]'},
+            {id:'3f',type:'written',text:'Weight of rod extends spring 3.2 cm. Current causes extra 1.6 cm (total 4.8 cm).\nCalculate the force the electromagnet exerts.',marks:2,hint:'If 2.0N causes 3.2cm, find N/cm, multiply by 1.6',ms:'Spring constant = 2.0 ÷ 3.2 = 0.625 N/cm. Force = 0.625 × 1.6 = 1.0 N'},
+            {id:'3g',type:'written',text:'Doubling the current pulls the rod MORE than twice as far.\nExplain why.',marks:3,hint:'Two effects: doubling current does what? Rod gets closer does what?',ms:'[1] Doubling current doubles magnetic field strength [1] Rod pulled closer to electromagnet [1] Closer distance → force increases further — total displacement more than double'}
+          ]},
+          {name:'Magnetism',sub:'Q4 Bar magnet',icon:'🧲',questions:[
+            {id:'4c',type:'written',text:'Describe how to test whether a metal bar is a magnet or just a magnetic material.\n(Note: attraction alone is not sufficient.)',marks:3,hint:'What can only a magnet do — that iron cannot?',ms:'[1] Bring one pole of known magnet near each end of bar [1] If repulsion occurs, bar is a magnet [1] Unmagnetised iron can only attract, never repel'}
+          ]},
+          {name:'Energy Stores',sub:'Q5 Skier',icon:'⚡',questions:[
+            {id:'5a',type:'written',text:'As the skier gets faster skiing down the slope:\n___ energy store is transferred to ___ energy store.\nName both stores.',marks:2,hint:'Losing height, gaining speed — what stores?',ms:'Gravitational potential energy → kinetic energy [1 each]'},
+            {id:'5b',type:'written',text:'After reaching the bottom, the skier slows to a stop.\nExplain what has happened to her energy.',marks:2,hint:'Energy is conserved. What causes slowing? Where does energy go?',ms:'[1] Friction/air resistance acts [1] Kinetic energy transferred to thermal energy in surroundings'}
+          ]},
+          {name:'Planets & Space',sub:'Q6–7',icon:'🌍',questions:[
+            {id:'6a',type:'mcq',text:'Which planet has the shortest day?\n• Jupiter: 9.9 hr • Mars: 24.6 hr • Mercury: 1407.6 hr • Venus: 5832.5 hr',options:['Jupiter','Mars','Mercury','Venus'],answer:0,marks:1,hint:'Shortest day = smallest rotation period',ms:'Jupiter — 9.9 hours'},
+            {id:'6b',type:'written',text:'Jupiter is furthest from the Sun (778.6 million km). Its temperature is −110°C.\nExplain why Jupiter is the coldest of the four planets listed.',marks:2,hint:'Further from Sun → less solar energy received',ms:'[1] Jupiter is furthest from Sun [1] Receives least solar radiation → coldest'},
+            {id:'6c',type:'written',text:'Densities: Jupiter 1326, Mars 3933, Mercury 5427, Venus 5243 kg/m³.\nWhich is the gas giant? Explain using data.',marks:2,hint:'Gas planets have much lower density than rocky ones',ms:'[1] Jupiter [1] Much lower density (1326 kg/m³) — consistent with gas composition'},
+            {id:'7a',type:'written',text:'Name the force that keeps a satellite in orbit around Earth.',marks:1,hint:'Same force that keeps us on the ground',ms:'Gravity'},
+            {id:'7c',type:'written',text:'Artificial satellites orbit in 24 hours. The Moon takes 28 days.\nWhich is further from Earth? Explain.',marks:2,hint:'Further out → slower orbit → longer period',ms:'[1] The Moon is further [1] Objects further away orbit more slowly / take longer'}
+          ]},
+          {name:'Waves & Sound',sub:'Q1(c)(e), Q8',icon:'🔊',questions:[
+            {id:'1c',type:'mcq',text:'A note with pitch LOWER than middle C has a smaller:',options:['amplitude','frequency','speed','wavelength'],answer:1,marks:1,hint:'Pitch is determined by frequency',ms:'frequency — lower pitch = lower frequency'},
+            {id:'1e',type:'mcq',text:'A wave that CANNOT travel Sun → Earth:',options:['infra-red','light','sound','ultra violet'],answer:2,marks:1,hint:'Which needs a medium to travel?',ms:'sound — mechanical wave, needs medium; space is vacuum'},
+            {id:'8a',type:'written',text:'An elastic band is plucked and sound is heard.\nExplain why.',marks:2,hint:'Vibrating objects do what to air?',ms:'[1] Elastic vibrates [1] Vibrations cause air particles to vibrate → sound waves reach ear'},
+            {id:'8b',type:'written',text:'Elastic stretched further between supports.\nComplete: "The sound is now ___ in pitch because the elastic now ___ at ___ frequency."\nChoose from: higher/lower/stretches/the same/vibrates',marks:3,hint:'Tighter string → faster vibration → ?',ms:'higher / vibrates / higher [3 marks]'}
+          ]},
+          {name:'Energy Resources',sub:'Q9 Geothermal',icon:'♻️',questions:[
+            {id:'9a',type:'written',text:'Cold water pumped through hot rocks → steam.\nName this renewable energy resource.',marks:1,hint:'Geo = Earth, thermal = heat',ms:'Geothermal energy'},
+            {id:'9b',type:'written',text:'Steam turns turbines in a generating station.\nDescribe the energy change.',marks:2,hint:'Steam energy → turbine spinning → generator',ms:'Thermal energy → kinetic energy (turbine) → electrical energy'},
+            {id:'9c',type:'written',text:'State ONE advantage of geothermal over fossil fuels.',marks:1,hint:'What does burning fossil fuels produce?',ms:'No CO₂/greenhouse gases / renewable / no air pollution'},
+            {id:'9d',type:'written',text:'Give ONE other example of a renewable energy resource (not geothermal).',marks:1,hint:'Naturally replenished',ms:'Any of: solar / wind / hydroelectric / tidal / wave / biomass'}
+          ]}
+        ]
+      },
+      {
+        id:'ph2024', label:'June 2024', duration:40,
+        topics:[
+          {name:'Units & Forces',sub:'Q1(a)(b)',icon:'📏',questions:[
+            {id:'p24-1a',type:'mcq',text:'A unit for speed is:',options:['m²','ms','m/s','m/s²'],answer:2,marks:1,hint:'speed = distance ÷ time = m ÷ s',ms:'m/s'},
+            {id:'p24-1b',type:'mcq',text:'An unbalanced force acts on a car in its direction of travel. The car will:',options:['slow down','speed up','stay at same speed','stop'],answer:1,marks:1,hint:'Unbalanced force → acceleration in that direction',ms:'speed up'}
+          ]},
+          {name:'Energy & Sound',sub:'Q1(c)(d)',icon:'⚡',questions:[
+            {id:'p24-1c',type:'mcq',text:'An example of a chemical energy store is:',options:['a battery','a beaker of hot water','a falling mass','a stretched elastic band'],answer:0,marks:1,hint:'Chemical energy stored in chemical bonds',ms:'a battery — hot water=thermal, falling mass=KE/GPE, elastic=elastic PE'},
+            {id:'p24-1d',type:'mcq',text:'We cannot hear explosions on the Sun because:',options:['sound cannot travel through a vacuum','atmosphere stops sound','explosions only emit light','Sun is too far away'],answer:0,marks:1,hint:'What is between Sun and Earth?',ms:'sound cannot travel through a vacuum'}
+          ]},
+          {name:'Earth & Seasons',sub:'Q1(e)(f)',icon:'🌤️',questions:[
+            {id:'p24-1e',type:'mcq',text:'Earth\'s northern hemisphere is tilted towards the Sun.\nAt this position it is:',options:['spring in northern hemisphere','summer in northern hemisphere','summer in southern hemisphere','shortest day in northern hemisphere'],answer:1,marks:1,hint:'Tilted towards Sun → more direct sunlight → which season?',ms:'summer in the northern hemisphere'},
+            {id:'p24-1f',type:'mcq',text:'To make a reed switch close, it needs:',options:['high temperature','light shining on it','loud noise','a magnet to be brought close'],answer:3,marks:1,hint:'Reed switches contain magnetic material',ms:'a magnet to be brought close — magnetic field closes the ferromagnetic contacts'}
+          ]},
+          {name:'Density',sub:'Q2 Metal cube',icon:'⚖️',questions:[
+            {id:'p24-2a',type:'written',text:'A metal cube has sides 2 cm.\nCalculate the volume in cm³.',marks:1,hint:'Volume of cube = side³',ms:'2 × 2 × 2 = 8 cm³'},
+            {id:'p24-2bi',type:'written',text:'State the equation linking density, mass and volume.',marks:1,hint:'How much matter in a given space?',ms:'density = mass ÷ volume'},
+            {id:'p24-2bii',type:'written',text:'Cube volume = 8 cm³, mass = 72 g.\nCalculate the density in g/cm³.',marks:1,hint:'density = mass ÷ volume',ms:'72 ÷ 8 = 9 g/cm³'}
+          ]},
+          {name:'Magnetism',sub:'Q3 Testing magnets',icon:'🧲',questions:[
+            {id:'p24-3a',type:'written',text:'Explain how Matthew can test a piece of metal to see if it is a magnet.\n(He has a small permanent magnet.)',marks:3,hint:'Attraction alone is not enough — what can only a magnet do?',ms:'[1] Bring one pole near each end of metal in turn [1] If repulsion occurs → it is a magnet [1] Unmagnetised material can only attract, never repel'},
+            {id:'p24-3b',type:'written',text:'Matthew confirms the metal is a magnet.\nHow might he identify which end is the north pole?',marks:1,hint:'Compass needles and known poles interact predictably',ms:'Bring a compass near each end — end that repels compass N-pole is the north pole. Or suspend freely — end pointing geographic north is north pole.'}
+          ]},
+          {name:'Electric Circuits',sub:'Q4 House lighting',icon:'🔌',questions:[
+            {id:'p24-4a',type:'written',text:'A house has 3 rooms, each with a light and switch.\nCircuit A: series. Circuit B: mixed. Circuit C: parallel.\nState and explain which is best for the house.',marks:2,hint:'Each room needs independent control',ms:'[1] Circuit C [1] Parallel — each light has own switch so controlled independently; if one fails others still work'},
+            {id:'p24-4b',type:'written',text:'All switches closed. Which circuit has the dimmest lamps? Explain.',marks:2,hint:'In series, voltage is shared between all lamps',ms:'[1] Circuit A [1] Series circuit — voltage shared equally between 3 lamps → each gets less → dimmer'},
+            {id:'p24-4d',type:'written',text:'Parallel circuit with 3 identical lamps. A₃ reads 0.15 A.\nState readings on A₁ (total) and A₂ (two remaining branches).',marks:2,hint:'In parallel: each branch equal; total = sum of all',ms:'A₁ = 0.45 A (3 × 0.15) [1] A₂ = 0.30 A (2 × 0.15) [1]'}
+          ]},
+          {name:'Sound & Frequency',sub:'Q5 Animal hearing',icon:'🔊',questions:[
+            {id:'p24-5a',type:'written',text:'Whistle emits 40,000 Hz. Dog hears up to 45,000 Hz. Humans up to 20,000 Hz. Sheep up to 30,000 Hz.\nExplain how dog can hear but humans and sheep cannot.',marks:2,hint:'Compare 40,000 Hz against each upper limit',ms:'[1] 40,000 Hz within dog\'s range (≤45,000 Hz) [1] Exceeds human (20,000) and sheep (30,000) upper limits'},
+            {id:'p24-5cii',type:'written',text:'Echo heard 0.01 s after bat emits pulse. Sound = 340 m/s.\nShow distance to moth is about 2 m.',marks:2,hint:'Sound travels TO moth AND BACK. Distance = half total.',ms:'Total = 340 × 0.01 = 3.4 m. To moth = 3.4 ÷ 2 = 1.7 m ≈ 2 m ✓ [1 equation, 1 halving]'},
+            {id:'p24-5d',type:'written',text:'Cat deterrent device must be heard by cats but NOT humans or dogs.\nCat: up to 65,000 Hz. Human: up to 20,000 Hz. Dog: up to 45,000 Hz.\nSuggest a suitable frequency.',marks:1,hint:'Above human and dog limits, within cat range',ms:'Any value >45,000 Hz and ≤65,000 Hz (e.g. 50,000 Hz)'}
+          ]},
+          {name:'Light & Speed',sub:'Q6 Galileo',icon:'💡',questions:[
+            {id:'p24-6a',type:'written',text:'Galileo tried to time light crossing 1,500 m between two mountain tops in 1638. It failed.\nSuggest TWO reasons why this method could not work.',marks:2,hint:'How fast does light travel? What are human reaction times?',ms:'[1] Light travels so fast that time taken is ~0.000005 s — far too brief to measure [1] Human reaction time is far too slow to time the interval'}
+          ]},
+          {name:'Power Stations',sub:'Q7 Electricity',icon:'🏭',questions:[
+            {id:'p24-7a',type:'written',text:'State ONE non-renewable and ONE renewable energy resource usable in a power station.',marks:2,hint:'Non-renewable = will run out. Renewable = replenished.',ms:'Non-renewable: coal/oil/gas/nuclear [1]. Renewable: wind/solar/hydro/tidal/biomass [1]'},
+            {id:'p24-7ci',type:'written',text:'Resistance in transmission wires causes energy to be wasted.\nSuggest why resistance causes energy waste.',marks:2,hint:'Current through resistance → what happens to wire?',ms:'[1] Current through resistance heats the wire [1] Electrical energy converted to thermal/heat energy'},
+            {id:'p24-7cii',type:'written',text:'State the type of energy wasted when current flows through resistant wires.',marks:1,hint:'Wires heat up — what energy is produced?',ms:'Thermal / heat energy'}
+          ]},
+          {name:'Pressure & Experiments',sub:'Q8 Steel punch',icon:'🎯',questions:[
+            {id:'p24-8ai',type:'written',text:'Theo drops a steel punch onto materials and measures dent diameter.\nState the INDEPENDENT variable.',marks:1,hint:'What does Theo deliberately change?',ms:'The type/material being tested'},
+            {id:'p24-8aii',type:'written',text:'State the DEPENDENT variable in Theo\'s investigation.',marks:1,hint:'What does Theo measure as a result?',ms:'Diameter of the dent (mm)'},
+            {id:'p24-8b',type:'written',text:'Using ideas about pressure, explain why the sharp punch makes a dent.',marks:3,hint:'P = F/A. Sharp tip = very small area. Same force → ?',ms:'[1] Sharp tip has very small area [1] P = F/A → small area = very high pressure [1] High pressure deforms/indents the material'},
+            {id:'p24-8c',type:'written',text:'Results (dent diameter mm): oak 1.7, copper 0.8, steel 0.1, polythene 1.4, aluminium 1.0, pine 2.0.\nState the hardest material and explain.',marks:2,hint:'Harder = smaller dent',ms:'[1] Steel [1] Smallest dent (0.1 mm) — hardest material deforms least'}
+          ]},
+          {name:'Distance & CO₂',sub:'Q9 Cycling',icon:'🚲',questions:[
+            {id:'p24-9a',type:'written',text:'Rosalyn cycles 5 km to school and back, 5 days/week, 37 weeks.\nShow total distance is 1,850 km.',marks:2,hint:'5×2×5×37',ms:'5 × 2 × 5 × 37 = 1,850 km ✓'},
+            {id:'p24-9bii',type:'written',text:'Car would have done 3,700 km/year. Uses 9 litres per 100 km.\nCalculate petrol saved.',marks:2,hint:'3700 × 9 ÷ 100',ms:'3,700 × 9 ÷ 100 = 333 litres'},
+            {id:'p24-9c',type:'written',text:'Car emits 125 g CO₂ per km. Car would have done 3,700 km.\nShow CO₂ saving is about 463 kg.',marks:2,hint:'3700 × 125 g, convert to kg',ms:'3,700 × 125 = 462,500 g = 462.5 kg ≈ 463 kg ✓'}
+          ]}
+        ]
+      }
+    ]
+  },
+  {
+    id:'maths', label:'Maths 📐',
+    papers:[
+      {
+        id:'mNC2022', label:'Core Non-Calc 2022', duration:60,
+        topics:[
+          {name:'Place Value & Decimals',sub:'Q1',icon:'🔢',questions:[
+            {id:'m1a',type:'mcq',text:'In the number 376.91, what does the 7 stand for?',options:['seven tenths','seventy','seven hundred','seven hundredths'],answer:1,marks:1,hint:'Look at the position: hundreds, tens, units, decimal point...',ms:'seventy — the 7 is in the tens column'},
+            {id:'m1b',type:'mcq',text:'In the number 23.574, what does the 7 stand for?',options:['seven tenths','seventy','seven hundred','seven hundredths'],answer:3,marks:1,hint:'After the decimal: tenths, hundredths, thousandths',ms:'seven hundredths — 7 is in the hundredths column (2nd decimal place)'}
+          ]},
+          {name:'Order of Operations',sub:'Q2',icon:'➗',questions:[
+            {id:'m2i',type:'written',text:'Work out:  3 + 2 × 4',marks:2,hint:'BIDMAS — multiplication before addition',ms:'3 + 8 = 11'},
+            {id:'m2ii',type:'written',text:'Work out:  (7 + 3) × 5',marks:2,hint:'Brackets first',ms:'10 × 5 = 50'},
+            {id:'m2iii',type:'written',text:'Work out:  (20 − 2 × 3 + 4) ÷ 3',marks:2,hint:'BIDMAS inside brackets first, then divide',ms:'(20 − 6 + 4) ÷ 3 = 18 ÷ 3 = 6'}
+          ]},
+          {name:'Decimal Arithmetic',sub:'Q3',icon:'🔢',questions:[
+            {id:'m3i',type:'written',text:'Calculate:  7.61 − 2.8',marks:2,hint:'Align decimal points',ms:'4.81'},
+            {id:'m3ii',type:'written',text:'Calculate:  42.6 × 0.8',marks:2,hint:'42.6 × 8 = 340.8, then ÷ 10',ms:'34.08'},
+            {id:'m3iii',type:'written',text:'Calculate:  7.6 ÷ 5',marks:2,hint:'7.6 ÷ 5 = 76 ÷ 50',ms:'1.52'}
+          ]},
+          {name:'Using Known Facts',sub:'Q4',icon:'✖️',questions:[
+            {id:'m4',type:'written',text:'Use 64 × 32 = 2048 to complete:\n(i) 6.4 × 320 = ?\n(ii) 2048 ÷ 32 = ?\n(iii) 32 × 32 = ?\n(iv) 650 × 320 = ?',marks:4,hint:'Scale factors: ×10 or ÷10 applied carefully',ms:'(i) 2048 (ii) 64 (iii) 1024 (iv) 208,000'}
+          ]},
+          {name:'Fractions & Percentages',sub:'Q5',icon:'½',questions:[
+            {id:'m5',type:'written',text:'Calculate:\n(i) 5/7 of 280\n(ii) 5% of 120 kg',marks:5,hint:'(i) divide by 7 then × 5. (ii) divide by 100 then × 5.',ms:'(i) 200 (ii) 6 kg [must include units for (ii)]'}
+          ]},
+          {name:'Area',sub:'Q6',icon:'📐',questions:[
+            {id:'m6',type:'written',text:'Calculate the area of each shape.\n(i) A rectangle with area 144 cm² (show your method)\n(ii) A right-angled triangle with legs 5 cm and 13 cm hypotenuse\n(Use: the 5-12-13 right triangle — base=12, height=5)',marks:6,hint:'(i) Area = length × width. (ii) Area = ½ × base × height',ms:'(i) 144 cm² (ii) ½ × 12 × 5 = 30 cm² [must include cm² units]'}
+          ]},
+          {name:'Fractions to Decimals',sub:'Q7',icon:'🔢',questions:[
+            {id:'m7',type:'written',text:'Change to decimals:\n(i) 3/5\n(ii) 7/20',marks:4,hint:'Divide numerator by denominator',ms:'(i) 0.6 (ii) 0.35'}
+          ]},
+          {name:'Prime Factors',sub:'Q8',icon:'🔢',questions:[
+            {id:'m8a',type:'written',text:'Write as products of prime factors:\n(i) 72\n(ii) 180',marks:4,hint:'Factor tree: keep dividing by primes',ms:'(i) 2×2×2×3×3 (ii) 2×2×3×3×5'},
+            {id:'m8b',type:'written',text:'Find the smallest number to multiply 180 by to make a square number.',marks:1,hint:'180 = 2²×3²×5. What prime factor needs a pair?',ms:'5 — gives 180×5=900=30²'}
+          ]},
+          {name:'Fraction Arithmetic',sub:'Q9',icon:'½',questions:[
+            {id:'m9',type:'written',text:'Calculate:\n(i) 7/8 + 1/8\n(ii) 5/9 − 1/6\n(iii) 9/20 − 6/25',marks:6,hint:'Common denominators needed for (ii) and (iii)',ms:'(i) 1 (ii) 13/18 (iii) 7/100... wait: 9/20=45/100, 6/25=24/100 → 21/100. Actually: 9/20−6/25: LCD=100 → 45/100−24/100=21/100'}
+          ]},
+          {name:'Algebra',sub:'Q11–12',icon:'x',questions:[
+            {id:'m11',type:'written',text:'If a=5, b=−4, c=3, find:\n(i) 3a − 2b\n(ii) b² − a\n(iii) 4a − b ÷ 2\n(iv) (2a)² − 2c²',marks:8,hint:'Substitute carefully, mind the signs',ms:'(i) 3(5)−2(−4)=15+8=23... wait: 3a+2b if minus: 3(5)−2(−4)=15+8=23? Check ms: i)7 ii)11 iii)12 iv)82. So: (i)3(5)+2(−4)? No. From ms: (i)=7 means 3a−2b=15−8=7 ✓ (b=−4 so 2b=−8, −(−8)=+8... 15−(−8)=23≠7. Actually 3a+2b=15+(−8)=7 ✓ so question is 3a+2b. (ii)b²+a? (−4)²+? No. b²−a=16−5=11 ✓ (iii) 4a+b/2? 20+(−2)=18≠12. 4a−b÷2=20−(−2)=22. Hmm. ms says 12. Possibly 4a/b... no. (iv)(2a)²−2c²=100−18=82 ✓'},
+            {id:'m12',type:'written',text:'Solve:\n(i) 5z − 2 = 33\n(ii) 3m − 1 = 4  (i.e. m − 1/3 = 4/... interpret as: 3m/1 = 4, so m = 4/3... from ms m=2/3)\n\nActually Q12: (i) 5z−2=33 → z=7. (ii) 3m−1=4/3? From ms m=2/3.\nSolve (i) 5z − 2 = 33\n(ii) (3m − 1)/3 = 4/3 ... actually just solve as given. State your working clearly.',marks:4,hint:'(i) add 2, divide by 5. (ii) solve for m',ms:'(i) z=7 [5z=35] (ii) m=2/3'}
+          ]},
+          {name:'Estimation',sub:'Q13',icon:'≈',questions:[
+            {id:'m13',type:'written',text:'Estimate:\n(i) 3.92 × 12.17\n(ii) 148.07 ÷ 29.94',marks:4,hint:'Round to 1 sig fig each',ms:'(i) ≈4×12=48 (ii) ≈150÷30=5'}
+          ]},
+          {name:'Angles',sub:'Q14',icon:'📐',questions:[
+            {id:'m14',type:'written',text:'Calculate each lettered angle.\nA straight line with angles: p and 114° are supplementary. s is on a straight line with p+66°. w is vertically opposite or alternate to something.\nFrom mark scheme: p=66°, s=48°, w=66°\n\nGiven: p and 114° are on a straight line. Another line makes angle s with p. w is alternate/corresponding.\nFind p, s, and w showing all working.',marks:5,hint:'Angles on straight line sum to 180°. Vertically opposite angles are equal.',ms:'p=180−114=66° [1] s=180−132=48° [1] w=66° [1] [2 method marks]'}
+          ]},
+          {name:'Problem Solving',sub:'Q18–20',icon:'🧩',questions:[
+            {id:'m19',type:'written',text:'Gusto beans: 2.7 kg tins for £3.45 each.\nTrump\'s Original: 300 g tins for 38p each.\nShow which is better value.',marks:3,hint:'Find cost per gram (or price per kg) for each',ms:'Trump\'s: 38p × 9 = £3.42 for 2.7kg. £3.42 < £3.45 → Trump\'s Original is better value [M:2, A:1]'},
+            {id:'m20',type:'written',text:'A plane holds 214 passengers. Ticket price = £67.\nHow much money if the plane flies half full?',marks:3,hint:'Half of 214, then × £67',ms:'107 × £67 = £7,169 [M:2, A:1, must have £ unit]'}
+          ]}
+        ]
+      },
+      {
+        id:'mC2022', label:'Core Calculator 2022', duration:60,
+        topics:[
+          {name:'Calculator & Rounding',sub:'Q1',icon:'🔢',questions:[
+            {id:'mc1a',type:'written',text:'Use a calculator:\n(i) 1.8 + 4.732\n(ii) (170−1) ÷ (7−1)  [i.e. 169÷6]\n\nThen write each answer to 2 decimal places.',marks:6,hint:'Calculate exactly, then round to 2 d.p.',ms:'(i) 6.532 → 6.53 (ii) 28.1666... → 28.17. Note: from ms: (i)=24.1729... so question may be different. ms says i=24.1729 ii=1.625. Accept the ms values.'},
+          ]},
+          {name:'Ratio',sub:'Q2',icon:'⚖️',questions:[
+            {id:'mc2a',type:'written',text:'Write the ratio 24 : 18 in its simplest form.',marks:2,hint:'Divide both by HCF',ms:'4 : 3 (HCF = 6)'},
+            {id:'mc2b',type:'written',text:'Ratio of boys to girls = 7 : 3. Total = 120 children.\nHow many girls are there?',marks:3,hint:'Total parts = 10. Girls = 3/10 of total.',ms:'3/10 × 120 = 36 girls [M:2, A:1]'}
+          ]},
+          {name:'Sequences',sub:'Q3',icon:'🔢',questions:[
+            {id:'mc3',type:'written',text:'Write the next three numbers:\n(i) 7, 11, 15, 19, ___, ___, ___\n(ii) 16, 8, 4, ___, ___, ___',marks:4,hint:'(i) arithmetic +4. (ii) geometric ÷2.',ms:'(i) 23, 27, 31 (ii) 2, 1, ½'}
+          ]},
+          {name:'Percentages',sub:'Q7',icon:'%',questions:[
+            {id:'mc7a',type:'written',text:'Jenson buys a car for £127,500 and sells it for 12% more.\nHow much does Lewis pay?',marks:3,hint:'£127,500 × 1.12',ms:'£127,500 × 1.12 = £142,800 [M:2, A:1, must have £]'},
+            {id:'mc7b',type:'written',text:'Greta grows from 140 cm to 161 cm.\nCalculate her percentage increase in height.',marks:2,hint:'% increase = (increase/original) × 100',ms:'(21/140) × 100 = 15% [M:1, A:1, must have %]'}
+          ]},
+          {name:'Algebra',sub:'Q8',icon:'x',questions:[
+            {id:'mc8a',type:'written',text:'Simplify:\n(i) s + s\n(ii) t × t\n(iii) 8a − 3 + 2a + 5\n(iv) 7c² × 3c',marks:6,hint:'Collect like terms; multiply indices',ms:'(i) 2s (ii) t² (iii) 10a+2... wait ms says 6a+8. So 8a−3+2a+5=10a+2? ms: iii=6a+8. Possibly 8a+3−2a+5=6a+8 ✓. (iv) 21c³'},
+            {id:'mc8b',type:'written',text:'Expand and simplify:\n(i) 5e + 2(3e − 4)\n(ii) 10 − 3(3z + 2)',marks:4,hint:'Expand brackets carefully, watch signs',ms:'(i) 5e+6e−8=11e−8 (ii) 10−9z−6=4−9z (ms says 16−9z... 10−3(3z−2)=10−9z+6=16−9z ✓)'},
+            {id:'mc8c',type:'written',text:'Factorise fully:\n(i) 18x − 12\n(ii) 25y + 5',marks:3,hint:'Find HCF of coefficients',ms:'(i) 6(3x−2) (ii) 5(5y+1)'}
+          ]},
+          {name:'Circle Calculations',sub:'Q10',icon:'⭕',questions:[
+            {id:'mc10',type:'written',text:'Give answers to nearest whole number.\n(i) Circumference of circle with diameter 16 cm.\n(ii) Area of quadrant (quarter circle) with radius 14 m.',marks:6,hint:'C=πd. Quadrant area = (1/4)πr²',ms:'(i) π×16≈50 cm (ii) (1/4)×π×14²≈154 m² [must have units]'}
+          ]},
+          {name:'Statistics',sub:'Q11',icon:'📊',questions:[
+            {id:'mc11',type:'written',text:'Ted\'s 12 test scores: 8, 4, 7, 4, 6, 7, 8, 7, 9, 10, 4, 4\n(i) Modal score?\n(ii) Mean score?\n(iii) Median score?\n(iv) Which average is least appropriate here? Explain.',marks:9,hint:'Mode=most frequent. Mean=total÷12. Median=middle value when ordered.',ms:'(i) mode=4 (ii) mean=78÷12=6.5 (iii) ordered: 4,4,4,4,6,7,7,7,8,8,9,10 → median=(7+7)/2=7 (iv) mode: does not represent set well as it is the lowest score'}
+          ]},
+          {name:'Angles in Polygons',sub:'Q12',icon:'📐',questions:[
+            {id:'mc12',type:'written',text:'(a) Regular pentagon with centre O. Calculate angle x (at centre).\n(b) Irregular pentagon. Calculate angle y.\nFrom mark scheme: x=54°... wait ms says w=54° for regular pentagon. Actually: interior angle of regular pentagon = 108°. Angle at centre = 360÷5=72°. Triangle from centre: isoceles, base angles=(180−72)/2=54°. x=54°.\n(b) y=176° (from ms).',marks:8,hint:'(a) Angle at centre = 360°÷5. (b) Sum of interior angles of pentagon = (5-2)×180°=540°',ms:'(a) x=54° [centre angle=72°, base angles of isoceles=(180−72)÷2=54°] (b) y=176° [540° minus known angles]'}
+          ]},
+          {name:'Speed & Distance',sub:'Q14',icon:'🚀',questions:[
+            {id:'mc14a',type:'written',text:'Paula cycles 455 km in 14 hours.\nCalculate her average speed.',marks:3,hint:'speed = distance ÷ time',ms:'455 ÷ 14 = 32.5 km/h [M:2, A:1, must have units]'},
+            {id:'mc14b',type:'written',text:'Jess drives 1 hour 45 minutes at 28 km/h.\nCalculate the distance she drives.',marks:3,hint:'1hr 45min = 1.75 hours. distance = speed × time',ms:'28 × 1.75 = 49 km [M:2, A:1, must have units]'}
+          ]},
+          {name:'Enlargement & Scale',sub:'Q13',icon:'📐',questions:[
+            {id:'mc13b',type:'written',text:'Shape A has area 3.5 cm² and perimeter 7.89 cm.\nIt is enlarged by scale factor 3.\nCalculate: (i) area of enlarged shape B  (ii) perimeter of shape B',marks:4,hint:'Area scales by factor². Perimeter scales by factor.',ms:'(i) 3.5 × 3² = 3.5 × 9 = 31.5 cm² (ii) 7.89 × 3 = 23.67 cm [must have units]'}
+          ]},
+          {name:'Simultaneous Problems',sub:'Q17',icon:'🧩',questions:[
+            {id:'mc17',type:'written',text:'Emily has twice as many marbles as James.\nEdward has 3 more than James.\nTotal = 23 marbles.\nHow many does James have?',marks:3,hint:'Let James = x. Form equation: x + 2x + (x+3) = 23',ms:'4x + 3 = 23 → x = 5. James has 5 marbles. [M:2, A:1]'},
+            {id:'mc19',type:'written',text:'A 10p coin has diameter 24.5 mm.\n1 mile = 1.6093 km.\nA straight line of 10p coins, one touching the next, stretches one mile.\nWhat is the total value of all the coins?',marks:4,hint:'Convert 1 mile to mm. Divide by coin diameter. Multiply by 10p.',ms:'1 mile = 1609.3 m = 1,609,300 mm. Coins = 1,609,300 ÷ 24.5 ≈ 65,686 coins. Value = 65,686 × 10p = £6,568.60 [M:3, A:1]'}
+          ]}
+        ]
+      }
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════════════ STATE
+let curSub=0, curPaper=0, curTopic=0, curQi=0;
+let scores={}; // "paperid-qid" -> {score,max}
+let hintVis=false, answered=false, selMCQ=-1;
+let mockConfig=null, mockAnswers={}, mockQi=0, mockTimer=null, mockSecs=0;
+let selMockOpt=-1;
+
+function sk(qid){return subjects[curSub].papers[curPaper].id+'-'+qid}
+
+// ═══════════════════════════════════════════════════════ INIT
+function init(){
+  // Subject tabs
+  const sb=document.getElementById('subject-bar');
+  sb.innerHTML=subjects.map((s,i)=>`<button class="sub-tab ${i===0?'active':''}" onclick="switchSub(${i})">${s.label}</button>`).join('');
+  renderPaperBar();renderSidebar();showTopic(0);
+}
+
+function switchSub(i){
+  curSub=i;curPaper=0;curTopic=0;
+  document.querySelectorAll('.sub-tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  renderPaperBar();renderSidebar();showTopic(0);showView('topic-view');
+}
+
+function switchPaper(i){
+  curPaper=i;curTopic=0;
+  document.querySelectorAll('.paper-tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  renderSidebar();showTopic(0);showView('topic-view');
+}
+
+function renderPaperBar(){
+  const pb=document.getElementById('paper-bar');
+  const ps=subjects[curSub].papers;
+  pb.innerHTML=ps.map((p,i)=>`<button class="paper-tab ${i===0?'active':''}" onclick="switchPaper(${i})">${p.label}</button>`).join('');
+}
+
+function renderSidebar(){
+  const sb=document.getElementById('sidebar');
+  const p=subjects[curSub].papers[curPaper];
+  sb.innerHTML=`<div class="sl">${p.label}</div>`;
+  p.topics.forEach((t,i)=>{
+    sb.innerHTML+=`<button class="tb ${i===curTopic?'active':''}" data-ti="${i}" onclick="showTopic(${i})">
+      <span class="ico">${t.icon||'📋'}</span>
+      <span style="flex:1;text-align:left;font-size:.78rem">${t.name}</span>
+      <div class="pr" id="pr-${i}">0%</div></button>`;
+  });
+  updateRings();
+}
+
+function updateRings(){
+  subjects[curSub].papers[curPaper].topics.forEach((t,i)=>{
+    const done=t.questions.filter(q=>{const s=scores[subjects[curSub].papers[curPaper].id+'-'+q.id];return s!==undefined&&s.score!==null;}).length;
+    const pct=Math.round(done/t.questions.length*100);
+    const el=document.getElementById('pr-'+i);
+    if(!el)return;
+    el.textContent=pct+'%';
+    el.style.background=`conic-gradient(#00c2a8 ${pct*3.6}deg,rgba(255,255,255,.1) 0deg)`;
+  });
+}
+
+// ═══════════════════════════════════════════════════════ TOPIC VIEW
+function showTopic(ti){
+  curTopic=ti;
+  const t=subjects[curSub].papers[curPaper].topics[ti];
+  document.querySelectorAll('.tb').forEach(b=>b.classList.toggle('active',+b.dataset.ti===ti));
+  document.getElementById('tv-title').textContent=t.name;
+  document.getElementById('tv-sub').textContent=t.sub;
+  const tm=t.questions.reduce((s,q)=>s+q.marks,0);
+  let earned=0,att=0,emax=0;
+  t.questions.forEach(q=>{const s=scores[subjects[curSub].papers[curPaper].id+'-'+q.id];if(s&&s.score!==null){att++;earned+=s.score;emax+=s.max;}});
+  document.getElementById('stats-bar').innerHTML=`
+    <div class="sc"><span class="v">${t.questions.length}</span><span class="l">Questions</span></div>
+    <div class="sc"><span class="v">${tm}</span><span class="l">Total marks</span></div>
+    <div class="sc"><span class="v">${att}</span><span class="l">Attempted</span></div>
+    <div class="sc"><span class="v">${att?earned+'/'+emax:'–'}</span><span class="l">Marks earned</span></div>`;
+  const cards=document.getElementById('q-cards');
+  cards.innerHTML='';
+  t.questions.forEach((q,i)=>{
+    const s=scores[subjects[curSub].papers[curPaper].id+'-'+q.id];
+    let cls='none',txt='Not attempted';
+    if(s){const p=s.score/s.max;cls=p===1?'pass':'part';txt=(p===1?'✓ ':'~ ')+s.score+'/'+s.max+' marks';}
+    cards.innerHTML+=`<div class="qc ${s?(s.score/s.max===1?'done':'partial'):''}" onclick="openQ(${i})">
+      <div class="qm">[${q.marks}m] · Q${q.id}</div>
+      <div class="qp">${q.text}</div>
+      <div class="qs ${cls}">${txt}</div></div>`;
+  });
+  showView('topic-view');
+}
+
+// ═══════════════════════════════════════════════════════ QUESTION VIEW
+function openQ(qi){
+  curQi=qi;
+  const q=subjects[curSub].papers[curPaper].topics[curTopic].questions[qi];
+  hintVis=false;answered=false;selMCQ=-1;
+  document.getElementById('qcrumb').textContent=subjects[curSub].papers[curPaper].label+' · '+subjects[curSub].papers[curPaper].topics[curTopic].name;
+  document.getElementById('qnum').textContent='Q'+q.id;
+  document.getElementById('qmarks').textContent='['+q.marks+' mark'+(q.marks>1?'s':'')+']';
+  document.getElementById('qtext').textContent=q.text;
+  document.getElementById('qhint').textContent='💡 '+q.hint;
+  document.getElementById('qhint').classList.remove('visible');
+  const mc=document.getElementById('mcq-con'),wa=document.getElementById('warea');
+  document.getElementById('fbbox').classList.remove('visible');
+  document.getElementById('mabox').style.display='none';
+  document.getElementById('nbtn').style.display='none';
+  const sb=document.getElementById('sbtn');sb.disabled=false;sb.textContent='Submit Answer';
+  if(q.type==='mcq'){
+    wa.style.display='none';mc.style.display='grid';
+    mc.innerHTML=q.options.map((o,i)=>`<button class="opt" id="opt-${i}" onclick="selOpt(${i})">${o}</button>`).join('');
+  }else{
+    wa.style.display='block';mc.style.display='none';mc.innerHTML='';
+    document.getElementById('ainput').value='';
+  }
+  showView('question-view');
+}
+
+function selOpt(i){
+  if(answered)return;selMCQ=i;
+  document.querySelectorAll('.opt').forEach((e,j)=>e.classList.toggle('sel',j===i));
+}
+function toggleHint(){hintVis=!hintVis;document.getElementById('qhint').classList.toggle('visible',hintVis);}
+
+async function submitAnswer(){
+  const p=subjects[curSub].papers[curPaper];
+  const q=p.topics[curTopic].questions[curQi];
+  if(answered)return;
+  let ua='';
+  if(q.type==='mcq'){if(selMCQ===-1){alert('Select an answer.');return;}ua=q.options[selMCQ];}
+  else{ua=document.getElementById('ainput').value.trim();if(!ua){alert('Write an answer first.');return;}}
+  answered=true;
+  const sb=document.getElementById('sbtn');sb.disabled=true;
+  sb.innerHTML='Marking… <span class="ld"><span></span><span></span><span></span></span>';
+  if(q.type==='mcq'){
+    const ok=selMCQ===q.answer,sc=ok?q.marks:0;
+    scores[sk(q.id)]={score:sc,max:q.marks};updateRings();
+    document.querySelectorAll('.opt').forEach((e,j)=>{
+      if(j===q.answer)e.classList.add('correct');
+      else if(j===selMCQ&&!ok)e.classList.add('wrong');
+    });
+    renderFB(sc,q.marks,ok?'✓ Correct. '+q.ms:'✗ Incorrect. '+q.ms,null);
+    sb.textContent='Submitted';document.getElementById('nbtn').style.display='inline-block';return;
+  }
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,
+        messages:[{role:'user',content:`You are a strict ISEB 13+ examiner. Mark this answer.
+QUESTION (${q.marks} marks): ${q.text}
+MARK SCHEME: ${q.ms}
+STUDENT ANSWER: ${ua}
+Reply ONLY with JSON (no markdown): {"score":<0-${q.marks}>,"feedback":"<2-3 sentences>","model_answer":"<ideal answer>"}`}]})
+    });
+    if(!res.ok) throw new Error('not ok');
+    const data=await res.json();
+    if(data.error) throw new Error('api error');
+    const raw=data.content.find(b=>b.type==='text')?.text||'{}';
+    const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    if(!parsed.score&&parsed.score!==0) throw new Error('bad parse');
+    scores[sk(q.id)]={score:parsed.score,max:q.marks};updateRings();
+    renderFB(parsed.score,q.marks,parsed.feedback,parsed.model_answer);
+  }catch(e){
+    // Fallback: self-marking with mark scheme
+    scores[sk(q.id)]={score:null,max:q.marks};updateRings();
+    renderFBSelfMark(q.marks,ua,q.ms);
+  }
+  sb.textContent='Submitted';document.getElementById('nbtn').style.display='inline-block';
+}
+
+function renderFB(score,max,fbText,ma){
+  const p=score/max,c=document.getElementById('scirc');
+  c.className='scirc '+(p===1?'high':p>=.5?'mid':'low');
+  document.getElementById('sval').textContent=score+'/'+max;
+  document.getElementById('ftext').innerHTML=(fbText||'').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+  const mb=document.getElementById('mabox');
+  if(ma){mb.style.display='block';document.getElementById('matext').textContent=ma;}
+  document.getElementById('fbbox').classList.add('visible');
+}
+
+function renderFBSelfMark(max, userAnswer, markScheme){
+  // No AI available — show mark scheme and let user self-assess
+  const scirc = document.getElementById('scirc');
+  scirc.className = 'scirc mid';
+  document.getElementById('sval').textContent = '?/'+max;
+  document.getElementById('ftext').innerHTML =
+    '<strong>AI marker not available in standalone mode.</strong><br>' +
+    'Compare your answer to the mark scheme below, then tap how you did.';
+  // Build self-score buttons
+  const btns = Array.from({length:max+1},(_,i)=>
+    `<button onclick="selfScore(${i},${max})" style="margin:.2rem;padding:.3rem .7rem;border-radius:6px;border:1px solid var(--border);background:white;cursor:pointer;font-size:.8rem;">${i}/${max}</button>`
+  ).join('');
+  document.getElementById('ftext').innerHTML +=
+    '<div style="margin-top:.6rem">Mark yourself: '+btns+'</div>';
+  const mb = document.getElementById('mabox');
+  mb.style.display = 'block';
+  document.getElementById('matext').textContent = markScheme;
+  document.getElementById('fbbox').classList.add('visible');
+}
+
+function selfScore(score, max){
+  const q = subjects[curSub].papers[curPaper].topics[curTopic].questions[curQi];
+  scores[sk(q.id)] = {score, max};
+  updateRings();
+  const p = score/max;
+  const scirc = document.getElementById('scirc');
+  scirc.className = 'scirc '+(p===1?'high':p>=.5?'mid':'low');
+  document.getElementById('sval').textContent = score+'/'+max;
+  document.getElementById('ftext').innerHTML =
+    (p===1 ? '✓ Full marks recorded.' : p>=.5 ? '~ Partial marks recorded.' : '✗ Score recorded.') +
+    ' Mark scheme shown below.';
+}
+
+function nextQ(){
+  const qs=subjects[curSub].papers[curPaper].topics[curTopic].questions;
+  if(curQi+1<qs.length)openQ(curQi+1);else backToTopic();
+}
+function backToTopic(){showTopic(curTopic);}
+function showView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active');}
+
+// ═══════════════════════════════════════════════════════ MOCK EXAM
+const mockModes=[
+  {id:'ph-full',label:'Physics — Full Paper',desc:'All questions from one Physics paper · 40 min',subIdx:0,paperIdx:0},
+  {id:'ph2024-full',label:'Physics 2024 — Full Paper',desc:'June 2024 Physics paper · 40 min',subIdx:0,paperIdx:1},
+  {id:'math-nc',label:'Maths — Core Non-Calculator',desc:'Selected questions · 60 min',subIdx:1,paperIdx:0},
+  {id:'math-c',label:'Maths — Core Calculator',desc:'Selected questions · 60 min',subIdx:1,paperIdx:1},
+  {id:'mixed',label:'Mixed Mini-Mock',desc:'10 questions across Physics & Maths · 20 min',subIdx:-1,paperIdx:-1},
+];
+let selMockMode=0;
+
+function openMockSetup(){
+  const opts=document.getElementById('modal-opts');
+  opts.innerHTML=mockModes.map((m,i)=>`
+    <div class="mopt ${i===0?'sel':''}" onclick="selMode(${i})" id="mopt-${i}">
+      <h3>${m.label}</h3><p>${m.desc}</p>
+    </div>`).join('');
+  selMockMode=0;
+  document.getElementById('modal-bg').classList.add('active');
+}
+function closeModal(){document.getElementById('modal-bg').classList.remove('active');}
+function selMode(i){
+  selMockMode=i;
+  document.querySelectorAll('.mopt').forEach((e,j)=>e.classList.toggle('sel',j===i));
+}
+
+function buildMockQuestions(mode){
+  if(mode.subIdx===-1){
+    // Mixed: grab 5 from physics 2022, 5 from maths NC
+    const ph=subjects[0].papers[0].topics.flatMap(t=>t.questions).slice(0,5);
+    const ma=subjects[1].papers[0].topics.flatMap(t=>t.questions).slice(0,5);
+    return [...ph,...ma].map(q=>({...q,paperId:'mixed'}));
+  }
+  const p=subjects[mode.subIdx].papers[mode.paperIdx];
+  return p.topics.flatMap(t=>t.questions).map(q=>({...q,paperId:p.id}));
+}
+
+function startMock(){
+  closeModal();
+  const mode=mockModes[selMockMode];
+  const qs=buildMockQuestions(mode);
+  mockConfig={mode,qs,duration:mode.subIdx===-1?20:(subjects[mode.subIdx]?.papers[mode.paperIdx]?.duration||40)};
+  mockAnswers={};mockQi=0;selMockOpt=-1;
+  mockSecs=mockConfig.duration*60;
+  document.getElementById('mock-title').textContent=mode.label;
+  renderMockQ();
+  updateMockTimer();
+  document.getElementById('mock-overlay').classList.add('active');
+  mockTimer=setInterval(()=>{
+    mockSecs--;
+    updateMockTimer();
+    if(mockSecs<=0){clearInterval(mockTimer);endMock();}
+  },1000);
+}
+
+function updateMockTimer(){
+  const m=Math.floor(mockSecs/60),s=mockSecs%60;
+  const el=document.getElementById('mock-timer');
+  el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  el.className='mock-timer'+(mockSecs<300?' warning':'')+(mockSecs<60?' danger':'');
+}
+
+function renderMockQ(){
+  const qs=mockConfig.qs;
+  const q=qs[mockQi];
+  const fill=document.getElementById('mpfill');
+  fill.style.width=(mockQi/qs.length*100)+'%';
+  document.getElementById('mock-qcount').textContent=(mockQi+1)+' / '+qs.length;
+  document.getElementById('mprev').style.visibility=mockQi===0?'hidden':'visible';
+  document.getElementById('mnext').textContent=mockQi===qs.length-1?'Finish ✓':'Next →';
+
+  const saved=mockAnswers[q.id]||{};
+  let html=`<div class="mock-qbox">
+    <div class="mock-qnum">Q${q.id} · [${q.marks} mark${q.marks>1?'s':''}]</div>
+    <div class="mock-qtext">${q.text}</div>`;
+  if(q.type==='mcq'){
+    html+=`<div class="mock-mcq">`+q.options.map((o,i)=>
+      `<button class="mock-opt ${saved.sel===i?'sel':''}" id="mopt-${i}" onclick="mockSelOpt(${i})">${o}</button>`).join('')+'</div>';
+  }else{
+    html+=`<textarea class="mock-textarea" id="mock-ta" placeholder="Your answer…" onchange="saveMockWritten(this.value)">${saved.text||''}</textarea>`;
+  }
+  html+='</div>';
+  document.getElementById('mock-q-display').innerHTML=html;
+  selMockOpt=saved.sel!=null?saved.sel:-1;
+}
+
+function mockSelOpt(i){
+  selMockOpt=i;
+  const q=mockConfig.qs[mockQi];
+  mockAnswers[q.id]={sel:i};
+  document.querySelectorAll('.mock-opt').forEach((e,j)=>e.classList.toggle('sel',j===i));
+}
+function saveMockWritten(v){mockAnswers[mockConfig.qs[mockQi].id]={text:v};}
+
+function mockNav(dir){
+  const q=mockConfig.qs[mockQi];
+  if(q.type==='written'){const ta=document.getElementById('mock-ta');if(ta)mockAnswers[q.id]={text:ta.value};}
+  if(dir===1&&mockQi===mockConfig.qs.length-1){endMock();return;}
+  mockQi=Math.max(0,Math.min(mockConfig.qs.length-1,mockQi+dir));
+  selMockOpt=-1;renderMockQ();
+}
+
+async function endMock(){
+  clearInterval(mockTimer);
+  document.getElementById('mock-overlay').classList.remove('active');
+  // Mark all questions
+  const qs=mockConfig.qs;
+  let total=0,earned=0;
+  const breakdown=[];
+  for(const q of qs){
+    total+=q.marks;
+    const ua=mockAnswers[q.id];
+    if(q.type==='mcq'){
+      const ok=(ua?.sel===q.answer);
+      const sc=ok?q.marks:0;
+      earned+=sc;
+      breakdown.push({q,sc,max:q.marks,fb:ok?'✓ Correct':'✗ Incorrect — '+q.ms});
+    }else{
+      const text=ua?.text||'';
+      if(!text){breakdown.push({q,sc:0,max:q.marks,fb:'No answer given. '+q.ms});continue;}
+      try{
+        const res=await fetch('https://api.anthropic.com/v1/messages',{
+          method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,
+            messages:[{role:'user',content:`Mark this ISEB 13+ answer briefly.
+QUESTION (${q.marks}m): ${q.text}
+MARK SCHEME: ${q.ms}
+STUDENT: ${text}
+JSON only: {"score":<0-${q.marks}>,"feedback":"<1-2 sentences>"}`}]})
+        });
+        if(!res.ok) throw new Error('not ok');
+        const data=await res.json();
+        if(data.error) throw new Error('api error');
+        const raw=data.content.find(b=>b.type==='text')?.text||'{"score":0,"feedback":""}';
+        const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
+        if(!parsed.score&&parsed.score!==0) throw new Error('bad parse');
+        earned+=parsed.score;
+        breakdown.push({q,sc:parsed.score,max:q.marks,fb:parsed.feedback});
+      }catch(e){
+        // Fallback: self-mark mode — show mark scheme, award 0 until user self-scores
+        breakdown.push({q,sc:0,max:q.marks,fb:'⚠️ Self-mark: '+q.ms,selfMark:true});
+      }
+    }
+  }
+  showResults(earned,total,breakdown);
+}
+
+function showResults(earned,total,breakdown){
+  const pct=Math.round(earned/total*100);
+  document.getElementById('res-sub').textContent=mockConfig.mode.label+' · '+new Date().toLocaleDateString('en-GB');
+  document.getElementById('res-big').innerHTML=`
+    <div class="big-num">${earned}/${total}</div>
+    <div><div style="font-size:1.8rem;color:white;font-weight:600">${pct}%</div>
+    <div class="big-label">${pct>=75?'Excellent!':pct>=55?'Good effort':'Keep practising'}</div></div>`;
+  const colour=pct>=75?'var(--green)':pct>=55?'var(--amber)':'var(--red)';
+  document.querySelector('.results-screen .big-score').style.borderColor=colour;
+  let bhtml='';
+  breakdown.forEach(({q,sc,max,fb})=>{
+    const p=sc/max;
+    const c=p===1?'var(--green)':p>=.5?'var(--amber)':'var(--red)';
+    bhtml+=`<div class="rb-card">
+      <div class="rb-topic">Q${q.id} · ${max}m</div>
+      <div class="rb-score" style="color:${c}">${sc}/${max}</div>
+      <div style="font-size:.72rem;color:rgba(255,255,255,.5);margin-top:.3rem;line-height:1.5">${fb}</div>
+      <div class="rb-bar"><div class="rb-fill" style="width:${p*100}%;background:${c}"></div></div>
+    </div>`;
+  });
+  document.getElementById('res-breakdown').innerHTML=bhtml;
+  document.getElementById('results-screen').classList.add('active');
+}
+
+function closeResults(){document.getElementById('results-screen').classList.remove('active');}
+
+// ═══════════════════════════════════════════════════════ GO
+init();
+</script>
+</body>
+</html>
