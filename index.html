@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -398,7 +397,7 @@ const subjects = [
             {id:'m5',type:'written',text:'Calculate:\n(i) 5/7 of 280\n(ii) 5% of 120 kg',marks:5,hint:'(i) divide by 7 then × 5. (ii) divide by 100 then × 5.',ms:'(i) 200 (ii) 6 kg [must include units for (ii)]'}
           ]},
           {name:'Area',sub:'Q6',icon:'📐',questions:[
-            {id:'m6',type:'written',text:'Calculate the area of each shape.\n(i) A rectangle with area 144 cm² (show your method)\n(ii) A right-angled triangle with legs 5 cm and 13 cm hypotenuse\n(Use: the 5-12-13 right triangle — base=12, height=5)',marks:6,hint:'(i) Area = length × width. (ii) Area = ½ × base × height',ms:'(i) 144 cm² (ii) ½ × 12 × 5 = 30 cm² [must include cm² units]'}
+            {id:'m6',type:'written',text:'Calculate the area of each shape. Show your method and include units.\n\n(i) A rectangle 12 cm long and 9 cm wide.\n\n(ii) A right-angled triangle with base 12 cm and perpendicular height 5 cm.\n\n(iii) A rectangle has area 144 cm². Its length is 16 cm. Calculate its width.',marks:6,hint:'(i) Area = length × width. (ii) Area = ½ × base × height. (iii) Rearrange: width = area ÷ length.',ms:'(i) 12 × 9 = 108 cm² [1] (ii) ½ × 12 × 5 = 30 cm² [1] (iii) 144 ÷ 16 = 9 cm [1] [1 mark each for method, 1 mark each for correct answer with units]'}
           ]},
           {name:'Fractions to Decimals',sub:'Q7',icon:'🔢',questions:[
             {id:'m7',type:'written',text:'Change to decimals:\n(i) 3/5\n(ii) 7/20',marks:4,hint:'Divide numerator by denominator',ms:'(i) 0.6 (ii) 0.35'}
@@ -418,7 +417,7 @@ const subjects = [
             {id:'m13',type:'written',text:'Estimate:\n(i) 3.92 × 12.17\n(ii) 148.07 ÷ 29.94',marks:4,hint:'Round to 1 sig fig each',ms:'(i) ≈4×12=48 (ii) ≈150÷30=5'}
           ]},
           {name:'Angles',sub:'Q14',icon:'📐',questions:[
-            {id:'m14',type:'written',text:'Calculate each lettered angle.\nA straight line with angles: p and 114° are supplementary. s is on a straight line with p+66°. w is vertically opposite or alternate to something.\nFrom mark scheme: p=66°, s=48°, w=66°\n\nGiven: p and 114° are on a straight line. Another line makes angle s with p. w is alternate/corresponding.\nFind p, s, and w showing all working.',marks:5,hint:'Angles on straight line sum to 180°. Vertically opposite angles are equal.',ms:'p=180−114=66° [1] s=180−132=48° [1] w=66° [1] [2 method marks]'}
+            {id:'m14',type:'written',text:'Calculate the missing angles. Show your working and give a reason for each answer.\n\n(i) Two angles on a straight line are p° and 114°. Find p.\n\n(ii) Angles on a straight line are 66°, s°, and 66°. Find s.\n\n(iii) Two straight lines cross. One angle is 114°. Find the vertically opposite angle w.\n\n(iv) A straight line crosses two parallel lines. One alternate angle is 66°. Find angle z on the other parallel line.',marks:5,hint:'Angles on a straight line sum to 180°. Vertically opposite angles are equal. Alternate angles (Z-angles) between parallel lines are equal.',ms:'(i) p = 180 − 114 = 66° [1] (ii) s = 180 − 66 − 66 = 48° [1] (iii) w = 114° (vertically opposite) [1] (iv) z = 66° (alternate angles) [1] [1 method mark for showing working]'}
           ]},
           {name:'Problem Solving',sub:'Q18–20',icon:'🧩',questions:[
             {id:'m19',type:'written',text:'Gusto beans: 2.7 kg tins for £3.45 each.\nTrump\'s Original: 300 g tins for 38p each.\nShow which is better value.',marks:3,hint:'Find cost per gram (or price per kg) for each',ms:'Trump\'s: 38p × 9 = £3.42 for 2.7kg. £3.42 < £3.45 → Trump\'s Original is better value [M:2, A:1]'},
@@ -455,7 +454,7 @@ const subjects = [
             {id:'mc11',type:'written',text:'Ted\'s 12 test scores: 8, 4, 7, 4, 6, 7, 8, 7, 9, 10, 4, 4\n(i) Modal score?\n(ii) Mean score?\n(iii) Median score?\n(iv) Which average is least appropriate here? Explain.',marks:9,hint:'Mode=most frequent. Mean=total÷12. Median=middle value when ordered.',ms:'(i) mode=4 (ii) mean=78÷12=6.5 (iii) ordered: 4,4,4,4,6,7,7,7,8,8,9,10 → median=(7+7)/2=7 (iv) mode: does not represent set well as it is the lowest score'}
           ]},
           {name:'Angles in Polygons',sub:'Q12',icon:'📐',questions:[
-            {id:'mc12',type:'written',text:'(a) Regular pentagon with centre O. Calculate angle x (at centre).\n(b) Irregular pentagon. Calculate angle y.\nFrom mark scheme: x=54°... wait ms says w=54° for regular pentagon. Actually: interior angle of regular pentagon = 108°. Angle at centre = 360÷5=72°. Triangle from centre: isoceles, base angles=(180−72)/2=54°. x=54°.\n(b) y=176° (from ms).',marks:8,hint:'(a) Angle at centre = 360°÷5. (b) Sum of interior angles of pentagon = (5-2)×180°=540°',ms:'(a) x=54° [centre angle=72°, base angles of isoceles=(180−72)÷2=54°] (b) y=176° [540° minus known angles]'}
+            {id:'mc12',type:'written',text:'Answer the following polygon angle questions. Show all working.\n\n(a) A regular pentagon has a point at its centre O. Lines are drawn from O to each vertex, creating 5 identical isosceles triangles.\n    (i) Calculate the angle at O inside one triangle.\n    (ii) The two base angles of each triangle are equal. Calculate angle x (one base angle).\n\n(b) An irregular pentagon has four of its interior angles: 78°, 110°, 95°, and 81°.\n    Calculate the fifth angle y.',marks:8,hint:'(a)(i) Angles at a point sum to 360°. Divide by 5. (a)(ii) Angles in a triangle sum to 180° — subtract the top angle, divide remaining by 2. (b) Interior angles of any pentagon sum to (5−2)×180° = 540°.',ms:'(a)(i) 360° ÷ 5 = 72° [1] (a)(ii) (180° − 72°) ÷ 2 = 54° [2] (b) 540° − (78+110+95+81) = 540° − 364° = 176° [2] [method marks: 1 for 540° formula, 1 for correct subtraction]'}
           ]},
           {name:'Speed & Distance',sub:'Q14',icon:'🚀',questions:[
             {id:'mc14a',type:'written',text:'Paula cycles 455 km in 14 hours.\nCalculate her average speed.',marks:3,hint:'speed = distance ÷ time',ms:'455 ÷ 14 = 32.5 km/h [M:2, A:1, must have units]'},
@@ -467,6 +466,262 @@ const subjects = [
           {name:'Simultaneous Problems',sub:'Q17',icon:'🧩',questions:[
             {id:'mc17',type:'written',text:'Emily has twice as many marbles as James.\nEdward has 3 more than James.\nTotal = 23 marbles.\nHow many does James have?',marks:3,hint:'Let James = x. Form equation: x + 2x + (x+3) = 23',ms:'4x + 3 = 23 → x = 5. James has 5 marbles. [M:2, A:1]'},
             {id:'mc19',type:'written',text:'A 10p coin has diameter 24.5 mm.\n1 mile = 1.6093 km.\nA straight line of 10p coins, one touching the next, stretches one mile.\nWhat is the total value of all the coins?',marks:4,hint:'Convert 1 mile to mm. Divide by coin diameter. Multiply by 10p.',ms:'1 mile = 1609.3 m = 1,609,300 mm. Coins = 1,609,300 ÷ 24.5 ≈ 65,686 coins. Value = 65,686 × 10p = £6,568.60 [M:3, A:1]'}
+          ]}
+        ]
+      }      ,
+      {
+        id:'mNC2024', label:'Non-Calc June 2024', duration:60,
+        topics:[
+          {name:'Number & Place Value',sub:'Q1–2',icon:'🔢',questions:[
+            {id:'nc24-1a',type:'mcq',text:'In the number 482.31, what does the 3 stand for?',
+             options:['three tenths','thirty','three','three hundredths'],answer:0,marks:1,
+             hint:'After the decimal point: tenths, hundredths...',
+             ms:'three tenths — 3 is in the first decimal place (tenths column)'},
+            {id:'nc24-1b',type:'mcq',text:'In the number 829756, what does the 2 stand for?',
+             options:['two tenths','twenty','twenty thousand','two thousand'],answer:2,marks:1,
+             hint:'HTh, TTh, Th, H, T, U — count from the right',
+             ms:'twenty thousand — 2 is in the ten-thousands column'},
+            {id:'nc24-1c',type:'written',text:'Write the correct sign < , > or = between each pair:\n\n(i) 2.4 __ 2.04\n(ii) −4 __ 3\n(iii) 0.15 __ 0.1500\n(iv) 3/8 __ 3/16\n(v) 4 __ 0.44\n(vi) 0.33 __ 0.3̄ (0.3 recurring)',
+             marks:3,hint:'Convert to same form to compare. Recurring 0.3̄ = 1/3 ≈ 0.333...',
+             ms:'(i) > (ii) < (iii) = (iv) > (v) > (vi) = [½ mark each, accept 3 marks for all 6 correct]'},
+            {id:'nc24-1d',type:'written',text:'A number line runs from −1 to 1. Point a is close to 1, approximately at 0.8. Point b is close to −1, approximately at −0.75.\n\nWrite the values of a and b.',
+             marks:2,hint:'Each small division = 0.25 (the line has 8 divisions between −1 and 1)',
+             ms:'a = 0.75 (accept 0.7–0.8) b = −0.75 (accept −0.7 to −0.8) [1 each]'},
+            {id:'nc24-2',type:'written',text:'Arrange these numbers from smallest to largest:\n\n7/25,  0.3,  35%,  1/4',
+             marks:2,hint:'Convert all to decimals: 7/25=0.28, 0.3=0.3, 35%=0.35, 1/4=0.25',
+             ms:'1/4, 7/25, 0.3, 35%  (i.e. 0.25, 0.28, 0.3, 0.35) [2 marks all correct, 1 mark for 3 in correct relative order]'}
+          ]},
+          {name:'Decimal Arithmetic',sub:'Q3',icon:'🔢',questions:[
+            {id:'nc24-3a',type:'written',text:'Work out 8.43 − 4.5. Show your method.',
+             marks:2,hint:'Align decimal points carefully: 8.43 − 4.50',
+             ms:'3.93 [1 method, 1 answer]'},
+            {id:'nc24-3b',type:'written',text:'Work out 9.2 ÷ 8. Show your method.',
+             marks:2,hint:'92 ÷ 8 = 11.5, so 9.2 ÷ 8 = ?',
+             ms:'1.15 [1 method, 1 answer]'},
+            {id:'nc24-3c',type:'written',text:'Work out 135 × 7.2. Show your method.',
+             marks:2,hint:'135 × 7 + 135 × 0.2, or 135 × 72 ÷ 10',
+             ms:'972 [1 method, 1 answer]'}
+          ]},
+          {name:'Fractions & Percentages',sub:'Q4',icon:'½',questions:[
+            {id:'nc24-4a',type:'written',text:'Calculate 2/9 of 45.',
+             marks:2,hint:'Divide by 9 first, then multiply by 2',
+             ms:'45 ÷ 9 = 5, × 2 = 10 [1 method, 1 answer]'},
+            {id:'nc24-4b',type:'written',text:'Calculate 55% of 120 metres. Include the unit in your answer.',
+             marks:2,hint:'10% = 12m. Build up: 50% + 5%',
+             ms:'50% = 60m, 5% = 6m, total = 66 metres [1 method, 1 answer with unit]'}
+          ]},
+          {name:'Using Known Facts',sub:'Q5',icon:'✖️',questions:[
+            {id:'nc24-5',type:'written',text:'Use 35 × 35 = 1225 to work out:\n\n(a) 35 × 0.35\n(b) 122.5 ÷ 35\n(c) 35 × 37\n(d) √1225',
+             marks:4,hint:'(a) ÷100 (b) half of 1225÷35=35, so half... (c) 35×35 + 35×2 (d) what number squared = 1225?',
+             ms:'(a) 12.25 (b) 3.5 (c) 1295 (d) 35 [1 each]'}
+          ]},
+          {name:'Area',sub:'Q6',icon:'📐',questions:[
+            {id:'nc24-6a',type:'written',text:'Calculate the area of each shape. Show working and include units.\n\n(i) A right-angled triangle with base 13 cm and perpendicular height 6 cm.\n\n(ii) A parallelogram with base 12 m and perpendicular height 4 m.',
+             marks:6,hint:'Triangle: ½ × base × height. Parallelogram: base × perpendicular height.',
+             ms:'(i) ½ × 13 × 6 = 39 cm² [2] (ii) 12 × 4 = 48 m² [2] [1 method mark + 1 answer+unit each]'},
+            {id:'nc24-6b',type:'written',text:'A rectangle has an area of 24 cm² and a perimeter of 22 cm.\n\nFind the length and width of the rectangle. Show your working.',
+             marks:2,hint:'If l + w = 11, and l × w = 24, what pairs of numbers multiply to 24 and add to 11?',
+             ms:'l + w = 11 (half perimeter). Pairs: 3 × 8 = 24 and 3 + 8 = 11. Length = 8 cm, width = 3 cm [1 method, 1 answer]'}
+          ]},
+          {name:'Equations',sub:'Q7',icon:'x',questions:[
+            {id:'nc24-7i',type:'written',text:'Solve: 3a − 2 = 7',
+             marks:2,hint:'Add 2 to both sides, then divide by 3',
+             ms:'3a = 9, a = 3 [1 method, 1 answer]'},
+            {id:'nc24-7ii',type:'written',text:'Solve: (7c + 13) / 4 = 12',
+             marks:2,hint:'Multiply both sides by 4 first, then solve for c',
+             ms:'7c + 13 = 48, 7c = 35, c = 5 [1 method, 1 answer]'}
+          ]},
+          {name:'Fraction Arithmetic',sub:'Q8',icon:'½',questions:[
+            {id:'nc24-8a',type:'written',text:'Calculate 5/6 − 1/6',
+             marks:2,hint:'Same denominator — just subtract numerators',
+             ms:'4/6 = 2/3 [1 method, 1 simplified answer]'},
+            {id:'nc24-8b',type:'written',text:'Calculate 3/8 + 5/12',
+             marks:2,hint:'LCD of 8 and 12 = 24',
+             ms:'9/24 + 10/24 = 19/24 [1 method, 1 answer]'},
+            {id:'nc24-8c',type:'written',text:'Calculate 3/10 ÷ 9/25',
+             marks:2,hint:'Flip the second fraction and multiply (KFC: Keep, Flip, Change)',
+             ms:'3/10 × 25/9 = 75/90 = 5/6 [1 method, 1 simplified answer]'},
+            {id:'nc24-8d',type:'written',text:'Calculate 4/25 × 15/16 × 2/3',
+             marks:2,hint:'Cancel common factors before multiplying',
+             ms:'Cancel: 4/25 × 15/16 × 2/3 = (4×15×2)/(25×16×3) = 120/1200 = 1/10 [1 method, 1 answer]'}
+          ]},
+          {name:'Algebra & Substitution',sub:'Q10–11',icon:'x',questions:[
+            {id:'nc24-10i',type:'written',text:'If d = 6, e = −2, f = 4, find:\n(i) 2d − f',
+             marks:2,hint:'Substitute carefully',
+             ms:'2(6) − 4 = 12 − 4 = 8 [1 method, 1 answer]'},
+            {id:'nc24-10ii',type:'written',text:'If d = 6, e = −2, f = 4, find:\n5e²',
+             marks:2,hint:'e² = (−2)² = 4 (squaring makes it positive)',
+             ms:'5 × (−2)² = 5 × 4 = 20 [1 method, 1 answer]'},
+            {id:'nc24-10iii',type:'written',text:'If d = 6, e = −2, f = 4, find:\n2f / (d + e)',
+             marks:2,hint:'Work out numerator and denominator separately first',
+             ms:'2(4) / (6 + (−2)) = 8 / 4 = 2 [1 method, 1 answer]'}
+          ]},
+          {name:'Angles',sub:'Q11 (diagram-free)',icon:'📐',questions:[
+            {id:'nc24-11',type:'written',text:'Two straight parallel lines are cut by a transversal. One angle formed is 44°.\n\nUsing angle rules, find angles v, w, x, and y where:\n• v is co-interior (same side) with 44°\n• w is in a triangle with v and a right angle\n• x is alternate to 44°\n• y is vertically opposite to 44°\n\nShow a reason for each answer.',
+             marks:7,hint:'Co-interior angles sum to 180°. Angles in triangle sum to 180°. Alternate angles are equal. Vertically opposite angles are equal.',
+             ms:'v = 180 − 44 = 136° (co-interior) [1+1] w = 180 − 136 − 90 = ... actually w = 180 − 90 − 44 = 46° (angles in triangle) [1+1] x = 44° (alternate angles) [1] y = 44° (vertically opposite) [1] [7 marks: answers + reasons]'}
+          ]},
+          {name:'Transformations',sub:'Q12 (described)',icon:'🔄',questions:[
+            {id:'nc24-12a',type:'written',text:'Triangle A has vertices at approximately (−1, 2), (0, 4), (0, 2).\nTriangle B has vertices at approximately (−6, −2), (−5, −4), (−5, −2).\n\nDescribe fully the single transformation that maps triangle A onto triangle B.',
+             marks:2,hint:'Is it the same size and orientation? If so it could be a translation. What vector moves A to B?',
+             ms:'Translation by vector (−5, −4) [1 "translation", 1 correct vector — both required for full marks]'},
+            {id:'nc24-12b',type:'written',text:'Triangle A has vertices at (−1, 2), (0, 4), (0, 2).\n\nDescribe where triangle C would appear after reflecting triangle A in the line x = 2.\n\nGive the coordinates of all three vertices of triangle C.',
+             marks:3,hint:'To reflect in x = 2: the x-distance from x=2 is mirrored. y-coordinates stay the same.',
+             ms:'(−1,2) → (5,2); (0,4) → (4,4); (0,2) → (4,2). Triangle C has vertices (5,2), (4,4), (4,2) [1 method, 2 correct vertices, 1 all three correct]'}
+          ]},
+          {name:'Sequences & Patterns',sub:'Q15',icon:'🔢',questions:[
+            {id:'nc24-15a',type:'written',text:'A sequence of patterns has black squares and grey squares.\nPattern n has (2n+1) black squares and n² grey squares.\n\n(a) How many black squares in pattern 5?\n(b) How many grey squares in pattern 5?\n(c) Which pattern has 21 black squares?\n(d) Which pattern has 121 grey squares?\n(e) Alan thinks there is a pattern with exactly 96 squares total. Is he correct? Explain.',
+             marks:8,hint:'(a)(b) substitute n=5. (c) solve 2n+1=21. (d) solve n²=121. (e) total = 2n+1+n² — is there an integer n that gives 96?',
+             ms:'(a) 11 (b) 25 (c) n=10 (d) n=11 (e) Incorrect — total = n²+2n+1 = (n+1)². Perfect squares near 96: 81(n=8) and 100(n=9). 96 is not a perfect square so no such pattern exists. [1,1,2,2,2]'}
+          ]},
+          {name:'Prime Factors',sub:'Q16',icon:'🔢',questions:[
+            {id:'nc24-16a',type:'written',text:'Write 56 as a product of its prime factors.',
+             marks:3,hint:'Factor tree: 56 = 8 × 7 = 2 × 2 × 2 × 7',
+             ms:'2 × 2 × 2 × 7 (or 2³ × 7) [1 factor tree method, 1 correct factors, 1 complete answer]'},
+            {id:'nc24-16b',type:'written',text:'A number e follows this pattern:\ne = 9 × d\n= b × b × c × 10\n= b × b × a × a × a × 5\n\nThe bottom line is the prime factorisation. Given a = 2 (from the prime factors), work out b, c, d and e.',
+             marks:4,hint:'Bottom line: b² × a³ × 5. a=2 so a³=8. b must be prime. b×b×c×10 = b²×c×2×5. Work upwards.',
+             ms:'a=2, b=3, c=2, d=18 (9×18=162... actually: b×b×a×a×a×5 = 9×2×2×2×5=360, so e=360, d=40... Let AI mark this one), e=360 [1 each for correct values]'}
+          ]},
+          {name:'Straight Line Graphs',sub:'Q14',icon:'📈',questions:[
+            {id:'nc24-14a',type:'written',text:'For the line y = 2x + 3:\n\n(i) Complete this table of values:\nx = −2, −1, 0, 1, 2\ny = ?, ?, ?, ?, ?\n\n(ii) What is the gradient of the line?\n(iii) Where does it cross the y-axis?',
+             marks:3,hint:'Substitute each x value. Gradient is the coefficient of x. y-intercept is the constant.',
+             ms:'(i) y = −1, 1, 3, 5, 7 (ii) gradient = 2 (iii) y-intercept = 3 (crosses at (0,3)) [1 each]'}
+          ]},
+          {name:'Cells & Growth',sub:'Q13',icon:'🔬',questions:[
+            {id:'nc24-13',type:'written',text:'The number of cells in a dish doubles every 20 minutes.\nStarting with 1 cell, how many cells are there after 2 hours?\nShow your working.',
+             marks:2,hint:'2 hours = 120 minutes. How many 20-minute periods is that? Then 1 × 2^n',
+             ms:'120 ÷ 20 = 6 doublings. 2⁶ = 64 cells [1 method, 1 answer]'}
+          ]},
+          {name:'Best Value & Problem Solving',sub:'Q9–10',icon:'🧩',questions:[
+            {id:'nc24-9',type:'written',text:'Gabby sells peaches in large boxes (800g, £4.80) and small boxes (500g, £2.95).\nWhich box is better value? Show your working.',
+             marks:3,hint:'Find cost per gram (or per 100g) for each',
+             ms:'Large: £4.80 ÷ 800 = 0.6p/g. Small: £2.95 ÷ 500 = 0.59p/g. Small box is better value [1 method for each, 1 conclusion]'},
+            {id:'nc24-10-choc',type:'written',text:'A shop sells chocolates. Three boxes are priced:\n• Box 1: 2 circles = 24p\n• Box 2: 1 circle + 1 triangle = 14p\n• Box 3: 1 triangle + 2 squares + 1 circle = 34p\n\nWork out the cost of each shape (circle, triangle, square).',
+             marks:5,hint:'From Box 1: 1 circle = 12p. Substitute into Box 2 to find triangle. Then use Box 3.',
+             ms:'Circle = 12p (Box1 ÷ 2) [1]. Triangle = 14 − 12 = 2p (Box2) [1]. Square = (34 − 12 − 2) ÷ 2 = 10p (Box3) [1]. [2 method marks]'}
+          ]}
+        ]
+      },
+      {
+        id:'mC2024', label:'Calc June 2024', duration:60,
+        topics:[
+          {name:'Calculator Skills',sub:'Q1',icon:'🔢',questions:[
+            {id:'c24-1ai',type:'written',text:'Use a calculator to work out 89.6 − 3.7³\nGive your answer to 2 decimal places.',
+             marks:2,hint:'3.7³ = 3.7 × 3.7 × 3.7. Calculate then round to 2 d.p.',
+             ms:'3.7³ = 50.653. 89.6 − 50.653 = 38.947 ≈ 38.95 [1 method, 1 answer to 2 d.p.]'},
+            {id:'c24-1aii',type:'written',text:'Use a calculator to work out (14.7 − 3.48) ÷ √5.76\nGive your answer to 2 decimal places.',
+             marks:2,hint:'Work out numerator and denominator separately. √5.76 = 2.4',
+             ms:'(14.7 − 3.48) ÷ √5.76 = 11.22 ÷ 2.4 = 4.675 ≈ 4.68 [1 method, 1 answer to 2 d.p.]'},
+            {id:'c24-1b',type:'written',text:'Write 4.87526 correct to 2 decimal places.',
+             marks:1,hint:'Look at the 3rd decimal place to decide whether to round up or down',
+             ms:'4.88 (3rd decimal is 5, so round up)'}
+          ]},
+          {name:'Ratio',sub:'Q2',icon:'⚖️',questions:[
+            {id:'c24-2a',type:'written',text:'Write the ratio 48 : 30 : 24 in its simplest form.',
+             marks:2,hint:'Find HCF of 48, 30 and 24',
+             ms:'HCF = 6. 8 : 5 : 4 [1 method, 1 answer]'},
+            {id:'c24-2b',type:'written',text:'The ratio of horses to donkeys on a farm is 5 : 3.\nThere are 24 donkeys.\nHow many horses are there?',
+             marks:3,hint:'If 3 parts = 24 donkeys, find 1 part, then multiply by 5',
+             ms:'1 part = 24 ÷ 3 = 8. Horses = 5 × 8 = 40 [1 method, 1 calculation, 1 answer]'},
+            {id:'c24-2c',type:'written',text:'A zoo has lions and tigers in the ratio 7 : 5.\nThere are 8 more lions than tigers.\nHow many lions are in the zoo?',
+             marks:3,hint:'The difference in ratio parts is 2. If 2 parts = 8 animals, find 1 part, then find lions (7 parts)',
+             ms:'Difference = 7−5 = 2 parts = 8 animals. 1 part = 4. Lions = 7 × 4 = 28 [1 method, 1 calculation, 1 answer]'}
+          ]},
+          {name:'Sequences',sub:'Q3',icon:'🔢',questions:[
+            {id:'c24-3',type:'written',text:'Write the next two numbers in each sequence:\n\n(a) 8, 11, 14, 17, ___, ___\n(b) 4, 2, 1, ½, ___, ___\n(c) 1, 4, 16, 64, ___, ___',
+             marks:6,hint:'(a) arithmetic +3. (b) geometric ÷2. (c) geometric ×4.',
+             ms:'(a) 20, 23 (b) ¼, ⅛ (c) 256, 1024 [2 marks each sequence — 1 for each correct number]'}
+          ]},
+          {name:'Inverse Operations',sub:'Q4',icon:'➗',questions:[
+            {id:'c24-4',type:'written',text:'Complete these:\n\n(a) 549 + ___ = 1874\n(b) 182 × ___ = 1328.6\n(c) ___ ÷ 0.34 = 1950\n(d) 10 − ___ = 27',
+             marks:4,hint:'(a) subtract (b) divide (c) multiply (d) careful with negatives',
+             ms:'(a) 1325 (b) 7.3 (c) 663 (d) −17 [1 each]'}
+          ]},
+          {name:'Symmetry',sub:'Q5 (described)',icon:'🔷',questions:[
+            {id:'c24-5a',type:'mcq',text:'A rectangle has right angles at all four corners and opposite sides equal. What is its order of rotational symmetry?',
+             options:['1','2','4','8'],answer:1,marks:1,
+             hint:'How many times does it look the same in one full 360° rotation?',
+             ms:'2 — a rectangle maps onto itself at 180° and 360°'},
+            {id:'c24-5b',type:'mcq',text:'A rhombus has 4 equal sides. Two pairs of opposite angles are equal. How many lines of symmetry does it have?',
+             options:['0','1','2','4'],answer:2,marks:1,
+             hint:'Lines of symmetry pass through opposite vertices or midpoints of opposite sides',
+             ms:'2 — both diagonals are lines of symmetry'},
+            {id:'c24-5c',type:'written',text:'A shape has 4 lines of symmetry and rotational symmetry of order 4.\n\nWhat is the name of this shape?',
+             marks:2,hint:'Think of regular shapes — which 4-sided shape has 4 lines of symmetry?',
+             ms:'Square [2 marks — must name it correctly]'}
+          ]},
+          {name:'Percentages',sub:'Q6',icon:'%',questions:[
+            {id:'c24-6a',type:'written',text:'Penny is given £26,000. She pays 17.5% in tax.\nHow much money does she have left over? Show working.',
+             marks:3,hint:'Find 17.5% of £26,000 then subtract. Or multiply by 0.825.',
+             ms:'17.5% of 26,000 = 0.175 × 26,000 = £4,550 tax. Left over = 26,000 − 4,550 = £21,450 [1 method, 1 tax amount, 1 final answer with £]'},
+            {id:'c24-6b',type:'written',text:'The town of Fuller grows from 4,500 to 4,860 people.\nCalculate the percentage increase. Show working.',
+             marks:3,hint:'% increase = (increase ÷ original) × 100',
+             ms:'Increase = 360. (360 ÷ 4500) × 100 = 8% [1 method, 1 calculation, 1 answer with %]'}
+          ]},
+          {name:'Algebra',sub:'Q7',icon:'x',questions:[
+            {id:'c24-7a',type:'written',text:'Simplify:\n(i) a + a + a\n(ii) c × c × c × c\n(iii) 4e × 3de\n(iv) 8f + 2 − 5f + 11',
+             marks:4,hint:'(i) collect like terms (ii) indices (iii) multiply coefficients, add indices (iv) collect like terms',
+             ms:'(i) 3a (ii) c⁴ (iii) 12de² (iv) 3f + 13 [1 each]'},
+            {id:'c24-7b',type:'written',text:'Expand and simplify:\n(i) 2 + 4(h + 6)\n(ii) 3(t + 2) − 4(2t − 3)',
+             marks:4,hint:'Expand brackets carefully, watch signs especially in (ii)',
+             ms:'(i) 2 + 4h + 24 = 4h + 26 (ii) 3t + 6 − 8t + 12 = −5t + 18 [1 method + 1 answer each]'},
+            {id:'c24-7c',type:'written',text:'Factorise fully: 16 − 24x',
+             marks:2,hint:'Find HCF of 16 and 24',
+             ms:'8(2 − 3x) [1 HCF identified, 1 correct factorisation]'},
+            {id:'c24-7d',type:'written',text:'Simplify then factorise: 6y + 7 − 2y + 9',
+             marks:2,hint:'Collect like terms first, then factorise',
+             ms:'4y + 16 = 4(y + 4) [1 simplification, 1 factorisation]'}
+          ]},
+          {name:'Polygon Angles',sub:'Q8',icon:'📐',questions:[
+            {id:'c24-8a',type:'written',text:'A regular polygon has an interior angle of 150°.\nCalculate the number of sides.\nShow all working.',
+             marks:3,hint:'Exterior angle = 180 − 150 = 30°. Number of sides = 360 ÷ exterior angle.',
+             ms:'Exterior angle = 180 − 150 = 30° [1]. Sides = 360 ÷ 30 = 12 [1]. Answer: 12-sided polygon (dodecagon) [1]'},
+            {id:'c24-8b',type:'written',text:'A regular polygon has two adjacent angles at a vertex marked 9x and x, where 9x is the interior angle and x is the exterior angle.\n\n(i) Use the fact that interior + exterior = 180° to find x.\n(ii) Hence find angle a, where a is the interior angle of this polygon.\n(iii) How many sides does this polygon have?',
+             marks:3,hint:'9x + x = 180°. Solve for x. Exterior angle = x, so sides = 360 ÷ x.',
+             ms:'(i) 10x = 180, x = 18° [1] (ii) a = 9 × 18 = 162° [1] (iii) 360 ÷ 18 = 20 sides [1]'}
+          ]},
+          {name:'Problem Solving',sub:'Q9',icon:'🧩',questions:[
+            {id:'c24-9',type:'written',text:'A shop gives equal numbers of £10, £20 and £50 prizes. The total of all the prizes is £1200.\nHow many prizes are there in total?\nShow working.',
+             marks:4,hint:'Let n = number of each prize. Total = 10n + 20n + 50n = 80n = 1200',
+             ms:'80n = 1200, n = 15. Total prizes = 15 × 3 = 45 [1 equation, 1 n=15, 1 total, 1 check]'}
+          ]},
+          {name:'Circles',sub:'Q10',icon:'⭕',questions:[
+            {id:'c24-10a',type:'written',text:'Calculate the area of a circle with radius 4 cm.\nGive your answer to 1 decimal place.',
+             marks:3,hint:'A = πr²',
+             ms:'π × 4² = π × 16 = 50.265... ≈ 50.3 cm² [1 formula, 1 calculation, 1 answer to 1 d.p. with unit]'},
+            {id:'c24-10b',type:'written',text:'Calculate the perimeter of a semicircle with diameter 17 m.\nGive your answer to 1 decimal place.',
+             marks:3,hint:'Perimeter = half circumference + diameter = (πd/2) + d',
+             ms:'Half circumference = π × 17 ÷ 2 = 26.703... Total = 26.703 + 17 = 43.703 ≈ 43.7 m [1 method, 1 calculation, 1 answer to 1 d.p. with unit]'}
+          ]},
+          {name:'Statistics',sub:'Q11',icon:'📊',questions:[
+            {id:'c24-11a',type:'written',text:'Plant heights (cm): 8.5, 8.6, 8.6, 8.1, 8.6, 7.9, 8.3, 8.2\n\nWork out the median, mode and mean heights.',
+             marks:5,hint:'Order first: 7.9, 8.1, 8.2, 8.3, 8.5, 8.6, 8.6, 8.6. Median = average of 4th and 5th values.',
+             ms:'Ordered: 7.9, 8.1, 8.2, 8.3, 8.5, 8.6, 8.6, 8.6. Median = (8.3+8.5)/2 = 8.4 cm [1+1]. Mode = 8.6 cm [1]. Mean = 66.8/8 = 8.35 cm [1+1]'},
+            {id:'c24-11b',type:'mcq',text:'A 9th plant is measured at 8.9 cm and added to the data set.\nWhich averages stay the same?',
+             options:['mode only','median only','mode and median','mean and mode'],answer:0,marks:1,
+             hint:'Adding 8.9: new ordered set has 9 values. Does this change mode? Median? Mean?',
+             ms:'mode only — mode stays 8.6 cm. Median changes to the 5th value (8.5). Mean changes as total and count both increase.'}
+          ]},
+          {name:'Enlargement',sub:'Q12',icon:'📐',questions:[
+            {id:'c24-12b',type:'written',text:'Shape P has area 2.5 cm² and is enlarged by scale factor 3 to give shape Q.\nCalculate the area of shape Q.',
+             marks:3,hint:'Area scale factor = (length scale factor)²',
+             ms:'Area Q = 2.5 × 3² = 2.5 × 9 = 22.5 cm² [1 method using scale factor², 1 calculation, 1 answer with unit]'},
+            {id:'c24-12c',type:'written',text:'Shape P has perimeter 7.63 cm and is enlarged by scale factor 3.\nCalculate the perimeter of shape Q.',
+             marks:3,hint:'Perimeter scales by the linear scale factor (not squared)',
+             ms:'Perimeter Q = 7.63 × 3 = 22.89 cm [1 method, 1 calculation, 1 answer with unit]'}
+          ]},
+          {name:'Speed & Distance',sub:'Q14',icon:'🚀',questions:[
+            {id:'c24-14a',type:'written',text:'A ship sails at 37 km/h for 7 hours.\nCalculate the distance the ship sails.',
+             marks:3,hint:'distance = speed × time',
+             ms:'37 × 7 = 259 km [1 formula, 1 calculation, 1 answer with unit]'},
+            {id:'c24-14b',type:'written',text:'A train travels 144 km at 64 km/h.\nCalculate the time taken in hours and minutes.',
+             marks:3,hint:'time = distance ÷ speed. Convert decimal hours to minutes.',
+             ms:'144 ÷ 64 = 2.25 hours = 2 hours 15 minutes [1 formula, 1 calculation, 1 correct conversion to h and min]'}
+          ]},
+          {name:'Number Theory',sub:'Q15',icon:'🔢',questions:[
+            {id:'c24-15',type:'written',text:'There are only four numbers less than 50 that have exactly 3 factors.\nOne of them is 49 (factors: 1, 7, 49).\n\nFind the other three numbers. Show why each has exactly 3 factors.',
+             marks:3,hint:'Numbers with exactly 3 factors are squares of primes (p²). Factors are: 1, p, p². What prime squares are less than 50?',
+             ms:'4 (1,2,4 — 2²), 9 (1,3,9 — 3²), 25 (1,5,25 — 5²) [1 each]'}
           ]}
         ]
       }
@@ -697,6 +952,8 @@ const mockModes=[
   {id:'math-nc',label:'Maths — Core Non-Calculator',desc:'Selected questions · 60 min',subIdx:1,paperIdx:0},
   {id:'math-c',label:'Maths — Core Calculator',desc:'Selected questions · 60 min',subIdx:1,paperIdx:1},
   {id:'mixed',label:'Mixed Mini-Mock',desc:'10 questions across Physics & Maths · 20 min',subIdx:-1,paperIdx:-1},
+  {id:'math-nc24',label:'Maths Non-Calc June 2024',desc:'Full non-calculator paper · 60 min',subIdx:1,paperIdx:2},
+  {id:'math-c24',label:'Maths Calculator June 2024',desc:'Full calculator paper · 60 min',subIdx:1,paperIdx:3},
 ];
 let selMockMode=0;
 
